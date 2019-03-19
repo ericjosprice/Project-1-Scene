@@ -1,4 +1,14 @@
 $(document).ready(function() {
+$("#create-post").on("click", function(){
+  $("#create-post").addClass("animated pulse");
+  var wait = setTimeout(function(){
+      $("#create-post").removeClass("animated pulse") 
+  }, 1000)
+  $("#post-form").toggleClass("hide").addClass("animated fadeInUp");
+  
+});
+
+
 
 ///Lynn's code starts////
 
@@ -40,13 +50,4 @@ $(document).ready(function() {
 //display number of likes and dislikes
 $("#thumbup").text(likeCounter);
 /////////////////////// Lynn's code above  
-
-$("#create-post").on("click", function(){
-    $("#create-post").addClass("animated pulse");
-    var wait = setTimeout(function(){
-        $("#create-post").removeClass("animated pulse") 
-    }, 1000)
-    $("#post-form").toggleClass("hide").addClass("animated fadeInUp");
-})
-
 })
