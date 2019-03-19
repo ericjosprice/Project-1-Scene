@@ -3,22 +3,22 @@ $(document).ready(function () {
     // $("#city-input").val("Austin");
     // $("#state-input").val("TX");
 
-
+    
 
     // capture business location on click
-    $("#submit").on("click", function (event) {
+    $("#submit-btn").on("click", function (event) {
         event.preventDefault();
-        BusStreetAddress = $("#address-input").val().trim();
-        var streetAddress = BusStreetAddress
-        var city = $("#city-input").val().trim();
-        var state = $("#state-input").val().trim();
+        var BusStreetAddress = $("#formGroupExampleInput2").val().trim();
+        console.log(BusStreetAddress);
+        // var streetAddress = BusStreetAddress
+        // var city = $("#city-input").val().trim();
+        // var state = $("#state-input").val().trim();
 
-        var busAddress = streetAddress + city + state
+        // var busAddress = streetAddress + city + state
         // var directionsQueryURL = "https://maps.googleapis.com/maps/api/directions/json?origin=30.2292427,-97.7727751&destination=" + busAddress + "&mode=walking&key=AIzaSyDBhbUBfUV_wtqtndcEiMxklXGIeIjITWw"
 
-        var directionsQueryURL = "https://cors-ut-bootcamp.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=30.2292427,-97.7727751&destination=" + busAddress + "&mode=walking&key=AIzaSyDBhbUBfUV_wtqtndcEiMxklXGIeIjITWw"
-
-
+        var directionsQueryURL = "https://cors-ut-bootcamp.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=30.2292427,-97.7727751&destination=" + BusStreetAddress + "&mode=walking&key=AIzaSyDBhbUBfUV_wtqtndcEiMxklXGIeIjITWw"
+        console.log(directionsQueryURL);
         // ajax call
         $.ajax({
             url: directionsQueryURL,

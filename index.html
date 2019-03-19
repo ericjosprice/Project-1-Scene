@@ -26,12 +26,6 @@
             </a>
         </div>
     </nav>
-    
-    <!-- Lynn's code below-->
-    <button type="submit" id="likebtn">👍</button>
-    <button type="submit" id="dislikebtn">👎</button>
-    <!--Lynn's code above-->
-    
     <div id="feed" class="animated zoomIn fadeIn">
         <div class="jumbotron">
             <div id="bar-name">King Bee</div>
@@ -51,11 +45,11 @@
                 <a class= "listing-button" href="#">
                     <i class="fas fa-thumbs-up"></i>
                 </a>
-                <div class= "listing-value">0</div>
+                <div class= "listing-value"></div>
                 <a class= "listing-button" href="#">
                     <i class="fas fa-thumbs-down"></i>
                 </a>
-                <div class= "listing-value">0</div>
+                <div class= "listing-value"></div>
             </div>
         </div>
 
@@ -65,6 +59,9 @@
             <hr>
             <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
             <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+            <!-- George's input for walking directions -->
+            <div id="walking-directions"></div>
+
         </div>
     </div>
 
@@ -98,7 +95,7 @@
                         </div>
                         <div class="form-group">
                             <input type="file" name="pic" accept="image/*">
-                            <input type="submit">
+                            <input type="submit" id="submit-btn">
                         </div>
                         
                     </form>
@@ -109,7 +106,7 @@
             <i id="create-post" class="fas fa-plus-square"></i>
         </div>
     </footer>
-    
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase.js"></script>
     <script src="assets/javascript/directions.js" type="text/javascript"></script>
     <script src="assets/javascript/logic.js" type="text/javascript"></script>
 </body>

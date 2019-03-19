@@ -1,3 +1,4 @@
+$(document).ready(function() {
 $("#create-post").on("click", function(){
   $("#create-post").addClass("animated pulse");
   var wait = setTimeout(function(){
@@ -11,7 +12,8 @@ $("#create-post").on("click", function(){
 
 ///Lynn's code starts////
 
-var config = {
+  // Initialize Firebase
+  var config = {
     apiKey: "AIzaSyASKSOl-vh7Ctml-gBjg70xwgNB77GAdco",
     authDomain: "yayornay-a4231.firebaseapp.com",
     databaseURL: "https://yayornay-a4231.firebaseio.com",
@@ -24,19 +26,28 @@ var config = {
   
   var database = firebase.database();
   
-  
   //initialize variables
   var likeCounter = 0;
   var dislikeCounter = 0;
   
-  $("#likebtn").on("click", function() {
-  likeCounter++;
-  console.log(likeCounter);
+  $(".fas.fa-thumbs-up").on("click", function(event) {
+    event.preventDefault();
+    likeCounter++;
+    database.ref("/yesCounter").set({
+        yesCount : likeCounter
+    })
   })
   
-  $("#dislikebtn").on("click", function() {
-  dislikeCounter++;
+
+  $(".fas.fa-thumbs-down").on("click", function(event) {
+    event.preventDefault();
+    dislikeCounter++;
+    database.ref("/noCounter").set({
+        dislikeCount : dislikeCounter
+    })
   })
 
+//display number of likes and dislikes
+$("#thumbup").text(likeCounter);
 /////////////////////// Lynn's code above  
-
+})
