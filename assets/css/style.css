@@ -1,0 +1,122 @@
+body {
+    background: #ebebeb;
+    font-family: 'Encode Sans Semi Condensed', sans-serif;
+    margin: 0px;
+    padding: 0px;
+    /* These values ensure the main feed content is pushed out of the bound of the fixed top and bottom bars */
+    padding-top: 120px;
+    padding-bottom: 50px;
+}
+
+#navbar {
+    background: #ffffff;
+    border-bottom: solid 1px #777777;
+    padding: 0px;
+    height: 120px;
+}
+
+#brand {
+    font-family: 'Stalemate', cursive;
+    margin: auto;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 62px;
+    color: #777777;
+    margin-top: 15px;
+}
+
+#feed {
+    padding: 20px;
+    overflow: auto;
+}
+
+#feed::-webkit-scrollbar { 
+    display: none; 
+} 
+
+.jumbotron {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 16px;
+    height: 400px;
+    max-width: 500px;
+}
+
+#bar-name {
+    font-size: 42px;
+    font-weight: 100;
+}
+
+#bar-location {
+    font-size: 21px;
+    font-weight: 100;
+}
+
+#deal-description {
+    margin-top: 30px;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 100%;
+}
+
+#deal-timeframe {
+    margin-top: 30px;
+    font-size: 42px;
+    font-weight: 100;
+}
+
+#listing-buttons-left {
+    float: left;
+}
+
+#listing-buttons-right {
+    float: right;
+}
+
+.listing-button {
+    color: #777777;
+    font-size: 24px;
+    margin-left: 10px; 
+}
+
+.listing-value {
+    color: #777777;
+    display: inline;
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+#form-title {
+    font-size: 36px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.plus-icon {
+    font-size: 48px;
+    text-align: center;
+}
+
+#footer {
+    font-size: 16px;
+    background: #ffffff;
+    color: #777777;
+    position: fixed;
+    bottom: 0;
+    border-top: solid 1px #777777;
+    width: 100%;
+}
+
+.hide {
+    display: none;
+}
+
+/* 
+FONT BANK 
+
+font-family: 'Stalemate', cursive;
+font-family: 'Suranna', serif;
+font-family: 'Raleway', sans-serif;
+font-family: 'Encode Sans Semi Condensed', sans-serif;
+
+*/
