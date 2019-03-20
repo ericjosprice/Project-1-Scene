@@ -1,19 +1,3 @@
-// Client ID
-// FEMSVD3N0IBIMAYZZU0DDZK3FUL3RPUI10XOPQ2YA3555ASP
-// Client Secret
-// K0H2FTFUQJM2LXRZBZVTJFADEK0K0HJZXNAXPWJFI3VK3E5P
-
-// $.ajax({
-//     url: "https://api.foursquare.com/v2/venues/categories" +"FEMSVD3N0IBIMAYZZU0DDZK3FUL3RPUI10XOPQ2YA3555ASP" + "K0H2FTFUQJM2LXRZBZVTJFADEK0K0HJZXNAXPWJFI3VK3E5P",
-//     method: "GET"
-// }).then(function(response){
-//     console.log(response)
-// });
-
-//endpoint for nearby venues/search 
-// parameters for nearby lat/long = 40.7629212,-73.9935085; query = ShopMart; intent = browse; radius = 500
-//credentials above
-//===================================================================================
 // use geolocation to get lon and lat
 var lat, lon, acc;
 
@@ -24,7 +8,7 @@ var options = {
 };
 
 // when user clicks the foursquare button run the geolocation function
-$(document).on("click", "#listing-buttons-left", clickedFourSquare)
+$(document).on("click", "#foursquare-button", clickedFourSquare)
 
 
 function clickedFourSquare(){
@@ -83,7 +67,7 @@ function getFoureSquareData() {
             newDiv.text(response.response.venues[i].name)
             newP.text(response.response.venues[i].location.address);
             newDiv.append(newP);
-            $("#fourSquare").append(newDiv);
+            $("#foursquare-data").append(newDiv);
         }
 
 
@@ -98,10 +82,6 @@ function getFoureSquareData() {
     // }).then(function (response) {
     //     console.log(response);
     // });
-}
-
-setTimeout(getFoureSquareData, 4000);
-console.log("yelp button was clicked")
 }
 //===================================================================================
 // // Initialize Firebase
@@ -187,7 +167,6 @@ console.log("yelp button was clicked")
 //     //   $("#time-display").text(sv.time);
 //     //   $("#frequency-display").text(sv.frequency);
 
-//     // Handle the errors
-// }, function (errorObject) {
-//     console.log("Errors handled: " + errorObject.code);
-// });
+setTimeout(getFoureSquareData, 4000);
+console.log("yelp button was clicked")
+}
