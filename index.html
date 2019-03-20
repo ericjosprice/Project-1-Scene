@@ -26,32 +26,37 @@
         </div>
     </nav>
 
+<!--this is where new card comes out-->
+    <div id="newcard"></div>
+
     <div id="feed" class="animated zoomIn fadeIn">
         <div class="jumbotron">
-            <div id="bar-name">King Bee</div>
-            <div id="bar-location">1906 E 12th St.</div>
+            <div id="business-name">King Bee</div>
+            <div id="address-location">1906 E 12th St.</div>
             <div id="deal-description">$5 sangria pitchers</div>
             <div id="deal-timeframe">5pm - 9pm</div>
             <hr>
+
             <div id="listing-buttons-left">
-                <a class= "listing-button" href="#">
-                    <i class="fab fa-yelp"></i>
+
+                <a class= "listing-button" id="a1" href="#">
+                    <div class="fab fa-yelp"></div>
                 </a>
-                <a class= "listing-button" href="#">
-                    <i class="fas fa-map-marker-alt"></i>
+                
+                <a class= "listing-button" id="a2" href="#">
+                    <div class="fas fa-map-marker-alt"></div>
                 </a>
             </div>
+
             <div id="listing-buttons-right">
-                <a class= "listing-button" href="#">
-                    <i class="fas fa-thumbs-up"></i>
-                </a>
-                <div class= "listing-value"></div>
-                <a class= "listing-button" href="#">
-                    <i class="fas fa-thumbs-down"></i>
-                </a>
-                <div class= "listing-value"></div>
+                    <!-- Thumbs up -->
+                    <div data-id="0" class="fas fa-thumbs-up listing-button thumbs-up"></div>
+                    <div id="thumbs-up-0" class= "listing-value"></div>
+                    <!-- Thumbs down -->
+                    <div data-id="0" class="fas fa-thumbs-down listing-button thumbs-down"></div>
+                    <div id="thumbs-down-0" class= "listing-value"></div>
+                </div>
             </div>
-        </div>
 
         <div class="jumbotron">
             <h1>Hello, world!</h1>
@@ -76,23 +81,23 @@
                     <form>
                         <div class="form-group">
                             <label for="formGroupExampleInput">Bar name</label>
-                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
+                            <input type="text" class="form-control" id="businessinput" placeholder="">
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput2">Address</label>
-                            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="">
+                            <input type="text" class="form-control" id="addressinput" placeholder="">
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">What's the deal?</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Limit 30 characters"></textarea>
+                            <textarea class="form-control" id="specialinput" rows="3" placeholder="Limit 30 characters"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput3">Timeframe</label>
-                            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="">
+                            <input type="text" class="form-control" id="timeinput" placeholder="">
                         </div>
                         <div class="form-group">
                             <input type="file" name="pic" accept="image/*">
-                            <input type="submit">
+                            <input id="newinfo" type="submit">
                         </div>
                         
                     </form>
