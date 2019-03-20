@@ -1,3 +1,6 @@
+var lon;
+var lat; 
+
 $(document).ready(function () {
     // code to get the userLocation
     $(document).on("click", ".fa-location-arrow", locationConsent)
@@ -29,18 +32,18 @@ $(document).ready(function () {
         // .oneClass.secondClass
         // gets the adress of the business directly from the display card
         var BusStreetAddress = $(".address-display." + key).text();
-        console.log("BusStreetAddress", BusStreetAddress);
         // add the city and state to the BusStreeAddress for the sake of ease
-        var busAddress = BusStreetAddress + "+Austin" + "+TX"
-
+        var busAddress = BusStreetAddress + "+Austin" + "+TX";
+        console.log("Eric:" + BusStreetAddress);
         // generating the queryURL for the AJAX call
-        var directionsQueryURL = "https://cors-ut-bootcamp.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=" + userOrigin + "&destination=" + busAddress + "&mode=walking&key=AIzaSyDBhbUBfUV_wtqtndcEiMxklXGIeIjITWw"
+        var directionsQueryURL = "https://cors-ut-bootcamp.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=" + userOrigin + "&destination=" + busAddress + "&mode=walking&key=AIzaSyDBhbUBfUV_wtqtndcEiMxklXGIeIjITWw";
 
         // ajax call
         $.ajax({
             url: directionsQueryURL,
             method: "GET"
         }).then(function (response) {
+            console.log(response)
             // creating the directions div to hold each leg of the journey
             var walkingJourney = $("<div id='journey-legs'>");
 
@@ -58,7 +61,7 @@ $(document).ready(function () {
                 // calls the HTML id to display the directions on the DOM
                 // $("#directions").html(walkingJourney);
                 $("#directions-container").html(walkingJourney);
-                $
+                
             }
 
         });
