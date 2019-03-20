@@ -12,8 +12,11 @@ $(document).ready(function () {
 
   var database = firebase.database();
 
-  $("#form-submit").on("click", function () {
 
+////////////////////////////
+// SUBMIT BUTTON FUNCTION //
+////////////////////////////
+  $("#form-submit").on("click", function () {
     event.preventDefault();
 
     // Form inputs
@@ -53,22 +56,28 @@ $(document).ready(function () {
       var key = childSnapshot.key;
 
       // HTML elements created with jQuery
-      var jumbotron = $("<div>").addClass("jumbotron");
+      var jumbotron = $("<div>").addClass("jumbotron" + " " + key);
       var post = $("<div>").attr("id", "post");
+          post.addClass("post" + " " + key);
       var businessDisplay = $("<div>").attr("id", "business-display").text(sv.business);
+          businessDisplay.addClass("businessDisplay" + " " + key);
       var addressDisplay = $("<div>").attr("id", "address-display").text(sv.address);
+          addressDisplay.addClass("addressDisplay" + " " + key)
       var dealDisplay = $("<div>").attr("id", "deal-display").text(sv.deal);
+          dealDisplay.addClass("dealDisplay" + " " + key)
       var timeframeDisplay = $("<div>").attr("id", "timeframe-display").text(sv.time);
-      var listingButtons = $("<div>").attr("id", "listing-buttons");
-      var getDirections = $("<div>").attr("id", "get-directions").addClass("fas fa-location-arrow listing-button");
-      var thumbsUp = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-up listing-button thumbs-up");
-      var thumbsUpCount = $("<div>").attr("id", "thumbs-up-0").addClass("listing-value").text("");
+          timeframeDisplay.addClass("timeframeDisplay" + " " + key)
+      var listingButtons = $("<div>").attr("id", "listing-buttons").addClass("listingButton" + " " + key)
+      var getDirections = $("<div>").attr("id", "get-directions").addClass("fas fa-location-arrow listing-button getDirections" + " " + key);
+      var thumbsUp = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-up listing-button thumbs-up thumbsUp" + " " + key);
+      var thumbsUpCount = $("<div>").attr("id", "thumbs-up-0").addClass("listing-value thumbsUpCount" + " " + key).text("");
       var thumbsDown = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-down listing-button thumbs-down");
-      var thumbsDownCount = $("<div>").attr("id", "thumbs-down-0").addClass("listing-value").text("");
-      var directionsContainer = $("<div>").attr("id", "directions-container").addClass("hide");
+      var thumbsDownCount = $("<div>").attr("id", "thumbs-down-0").addClass("listing-value thumbsdown" + " " + key).text("");
+      var directionsContainer = $("<div>").attr("id", "directions-container").addClass("hide directionsContainer" + " " + key);
       var directions = $("<div>").attr("id", "directions").text("THESE ARE DIRECTIONS");
-      var closeDirections = $("<div>").attr("id", "close-directions").addClass("far fa-times-circle listing-button");
-
+          directions.addClass("directions" + " " + key);
+      var closeDirections = $("<div>").attr("id", "close-directions").addClass("far fa-times-circle listing-button closeDirections" + " " + key);
+      
       database.ref(key + "/likes").on("value", function (likesSnapshot) {
         console.log(key + " got a like:", likesSnapshot.val());
       });
@@ -91,6 +100,15 @@ $(document).ready(function () {
       console.log("The read failed: " + errorObject.code);
     })
 
+    /////////////////////////////////////
+    // CLICK FUNCTION FOR LIKE/DISLIKE //
+    ////////////////////////////////////
+    $("#thumbs-up-0").on("click", function(){
+      event.preventDefault();
+      $(".thumbUp-" + key).text();
+
+
+    })
   // Click functions for navigating the document
   $("#create-post").on("click", function () {
     $("#create-post").addClass("animated pulse");
