@@ -1,4 +1,7 @@
 $(document).ready(function () {
+
+    var userOrigin;
+
     // code to get the userLocation
     $(document).on("click", ".fa-location-arrow", locationConsent)
     function locationConsent() {
@@ -28,13 +31,17 @@ $(document).ready(function () {
         console.log("clickedForDirections", key);
         // .oneClass.secondClass
         // gets the adress of the business directly from the display card
-        var BusStreetAddress = $(".address-display." + key).text();
-        console.log("BusStreetAddress", BusStreetAddress);
+        var BusStreetAddress = $(".address-display" + key).text();
+
+        // str = str.replace(/\s+/g, '');
+        console.log("BusStreetAddress " + BusStreetAddress.replace(/\s+/g, '+'));
         // add the city and state to the BusStreeAddress for the sake of ease
-        var busAddress = BusStreetAddress + "+Austin" + "+TX"
+        var busAddress = BusStreetAddress.replace(/\s+/g, '+') + "+Austin" + "+TX"
 
         // generating the queryURL for the AJAX call
         var directionsQueryURL = "https://cors-ut-bootcamp.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=" + userOrigin + "&destination=" + busAddress + "&mode=walking&key=AIzaSyDBhbUBfUV_wtqtndcEiMxklXGIeIjITWw"
+
+        console.log(directionsQueryURL);
 
         // ajax call
         $.ajax({
