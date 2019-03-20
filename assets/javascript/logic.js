@@ -1,18 +1,5 @@
-$(document).ready(function () {
-  $("#create-post").on("click", function () {
-    $("#create-post").addClass("animated pulse");
-    var wait = setTimeout(function () {
-      $("#create-post").removeClass("animated pulse")
-    }, 1000)
-    $("#post-form").toggleClass("hide").addClass("animated fadeInUp");
+$(document).ready(function() {
 
-  });
-
-
-
-  ///Lynn's code starts////
-
-  // Initialize Firebase
   var config = {
     apiKey: "AIzaSyASKSOl-vh7Ctml-gBjg70xwgNB77GAdco",
     authDomain: "yayornay-a4231.firebaseapp.com",
@@ -21,138 +8,152 @@ $(document).ready(function () {
     storageBucket: "yayornay-a4231.appspot.com",
     messagingSenderId: "473437635582"
   };
+
   firebase.initializeApp(config);
-
-
   var database = firebase.database();
 
-  //initialize variables
-  var likeCounter = 0;
-  var dislikeCounter = 0;
+// Wes' code starts
 
-  ////////////////////////
-  ///Firebase functions///
-  ////////////////////////
-  $("#newinfo").on("click", function (event) {
-      event.preventDefault();
-      var businessName = $("#businessinput").val().trim();
-      var addressInput = $("#addressinput").val().trim();
-      var specialInput = $("#specialinput").val().trim();
-      var timeFrame = $("#timeinput").val().trim();
+  $("#create-post").on("click", function(){
+    $("#create-post").addClass("animated pulse");
+    setTimeout(function(){
+        $("#create-post").removeClass("animated pulse") 
+    }, 1000);
+    $("#post-form").toggleClass("hide").addClass("animated fadeInUp");
+  });
 
-      var newData = {
-        business: businessName,
-        address: addressInput,
-        special: specialInput,
-        timeframe: timeFrame,
-      }
+  $("#foursquare-button").on("click", function(){
+    $("#foursquare-button").addClass("animated pulse");
+    setTimeout(function(){
+        $("#foursquare-button").removeClass("animated pulse") 
+    }, 1000);
+    $("#foursquare").toggleClass("hide").addClass("animated fadeInUp");
+  });
 
-      database.ref("newdata").push(newData);
+  $("#get-directions").on("click", function(){
+    $("#directions-container").removeClass("hide");
+  });
 
-      //clear input boxes
-      $("#businessinput").val("");
-      $("#addressinput").val("");
-      $("#specialinput").val("");
-      $("#timeinput").val("");
+  $("#close-directions").on("click", function(){
+    $("#directions-container").addClass("hide");
+  });
+
+
+//////////////////////////////////////////
+//LIKE AND DISLIKE FUNCTION FOR LATER...//
+//////////////////////////////////////////  
+
+//initialize variables
+  // var likeCounter = 0;
+  // var dislikeCounter = 0;
+  
+  // $(".thumbs-up").on("click", function (event) {
+  //     event.preventDefault();
+  //     var id = $(this).attr("data-id");
+  //     var num = +($("#thumbs-up-" + id).text());
+  //     num++;
+  //     $("#thumbs-up-" + id).text(num);
+  //     likeCounter++;
+  //   database.ref("/yesCounter").set({
+  //     yesCount: likeCounter
+  //   })
+  // })
+  
+  // $(".thumbs-down").on("click", function (event) {
+  //     event.preventDefault();
+  //     var id = $(this).attr("data-id");
+  //     var num = +($("#thumbs-down-" + id).text());
+  //     num++;
+  //     $("#thumbs-down-" + id).text(num);
+  //     dislikeCounter++;
+  //   database.ref("/noCounter").set({
+  //     dislikeCount: dislikeCounter
+  //   })
+  // })
+
+
+
+  //////////////////////////////
+  // STORING STUFF IN FIREBASE//
+  //////////////////////////////
+  // Firebase watcher .on("child_added")
+  database.ref().on("child_added", function (childSnapshot) {
+    // storing the snapshot.val() in a variable for convenience
+    var sv = childSnapshot.val();
+
+    // Dynamically created cards and storing values in firebase
+    var jumbotron = $("<div>").addClass("jumbotron");
+    var post = $("<div>").attr("id", "post");
+    var businessDisplay = $("<div>").attr("id", "business-display").text(sv.business);
+    var addressDisplay = $("<div>").attr("id", "address-display").text(sv.address);
+    var dealDisplay = $("<div>").attr("id", "deal-display").text(sv.deal);
+    var timeframeDisplay = $("<div>").attr("id", "timeframe-display").text(sv.time);
+    var listingButtons = $("<div>").attr("id", "listing-buttons");
+    var getDirections = $("<div>").attr("id", "get-directions").addClass("fas fa-location-arrow listing-button");
+    var thumbsUp = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-up listing-button thumbs-up");
+    var thumbsUpCount = $("<div>").attr("id", "thumbs-up-0").addClass("listing-value").text("");
+    var thumbsDown = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-down listing-button thumbs-down");
+    var thumbsDownCount = $("<div>").attr("id", "thumbs-down-0").addClass("listing-value").text("");
+    var directionsContainer = $("<div>").attr("id", "directions-container").addClass("hide");
+    var directions = $("<div>").attr("id", "directions").text("THESE ARE DIRECTIONS");
+    var closeDirections = $("<div>").attr("id", "close-directions").addClass("far fa-times-circle listing-button");
+
+    database.ref(key + "/likes").on("value", function (likesSnapshot) {
+      console.log(key + " got a like:", likesSnapshot.val());
+    });
+    database.ref(key + "/dislikes").on("value", function (likesSnapshot) {
+      console.log(key + " got a dislike:", likesSnapshot.val());
     });
 
-    database.ref("newdata").on("child_added", function (childSnapshot) {
-      console.log(childSnapshot.val());
+    // creating the post to HTML with the above variables linked to firebase
+    $("#feed").prepend(jumbotron);
+    jumbotron.append(post);
+    post.append(businessDisplay, addressDisplay, dealDisplay, timeframeDisplay);
+    post.append("<hr>");
+    post.append(listingButtons);
+    listingButtons.append(getDirections, thumbsUp, thumbsUpCount, thumbsDown, thumbsDownCount);
+    jumbotron.append(directionsContainer);
+    directionsContainer.append("<hr>");
+    directionsContainer.append(directions, closeDirections);
+  });
 
-      var newBusiness = childSnapshot.val().business;
-      var newAddress = childSnapshot.val().address;
-      var newSpecial = childSnapshot.val().special;
-      var newTime = childSnapshot.val().timeframe;
+  /////////////////////////
+  //FORM SUBMIT FUNCTION///
+  /////////////////////////
+  $("#form-submit").on("click", function(){
+    event.preventDefault();
 
+    // Form inputs
+    var businessInput = $("#business-input").val().trim();
+    var addressInput = $("#address-input").val().trim();
+    var dealInput = $("#deal-input").val().trim();
+    var timeframeInput = $("#timeframe-input").val().trim();
 
-        //Create card dynamically and append them
-        var div = $("<div>");
-        div.addClass("animated zoomIn fadeIn");
-        div.attr("id", "feed");
-        $("#newcard").append(div);
+    if (businessInput === "" ||
+        addressInput === "" ||
+        dealInput === "" ||
+        timeframeInput === "") {
+        alert("Complete all fields to continue.");
+        return;
+    } else {
+        // Code for handling the push into firebase
+        database.ref().push({
+            business: businessInput,
+            address: addressInput,
+            deal: dealInput,
+            time: timeframeInput,
+            dateAdded: firebase.database.ServerValue.TIMESTAMP
+        });
 
-        var jumboDiv = $("<div>");
-        jumboDiv.addClass("jumbotron");
-        $("#feed").append(jumboDiv);
+      $("#business-input").val("")
+      $("#address-input").val("")
+      $("#deal-input").val("")
+      $("#timeframe-input").val("")
+    }
 
-        var businessDiv = $("<div>");
-        businessDiv.attr("id", "business-name");
-        $(".jumbotron").append(businessDiv);
-        var addressDiv = $("<div>");
-        addressDiv.attr("id", "address-location");
-        $(".jumbotron").append(addressDiv);
-        var dealDiv = $("<div>");
-        dealDiv.attr("id", "deal-description");
-        $(".jumbotron").append(dealDiv);
-        var timeframeDiv = $("<div>");
-        timeframeDiv.attr("id", "deal-timeframe");
-        $(".jumbotron").append(timeframeDiv);
-        $(".jumbotron").append("<hr>");
-
-        // var markerDiv = $("<div>");
-        // markerDiv.attr("id", "listing-buttons-left");
-        // $(".jumbotron").append(markerDiv);
-
-        // var listButton1 = $("<a>");
-        // listButton1.addClass("listing-button");
-        // listButton1.attr("id", "a1");
-        // listButton1.attr("href", "#");
-        // $("#listing-buttons-left").append(listButton1);
-
-        // var yelpI = $("<div>");
-        // yelpI.addClass("fab fa-yelp");
-        // $("#a1").append(yelpI);
-
-
-
-        var thumbsDiv = $("<div>");
-        thumbsDiv.attr("id", "listing-buttons-right");
-        $(".jumbotron").append(thumbsDiv);
-        var tu1Div = $("<div>");
-        tu1Div.attr("data-id", "0");
-        tu1Div.addClass("fas fa-thumbs-up listing-button thumbs-up");
-        $("#listing-buttons-right").append(tu1Div);
-        var tu2Div = $("<div>");
-        tu2Div.attr("id", "thumbs-up-0");
-        tu2Div.addClass("listing-value");
-        $("#listing-buttons-right").append(tu2Div);
-        var td1Div = $("<div>");
-        td1Div.attr("data-id", "0");
-        td1Div.addClass("fas fa-thumbs-down listing-button thumbs-down");
-        $("#listing-buttons-right").append(td1Div);
-        var td2Div = $("<div>");
-        td2Div.attr("id", "thumbs-down-0");
-        td2Div.addClass("listing-value");
-        $("#listing-buttons-right").append(td2Div);
-  })
-
-
-///////////////////////////
-//like and dislike clicks//
-///////////////////////////
-$(".thumbs-up").on("click", function (event) {
-  event.preventDefault();
-  var id = $(this).attr("data-id");
-  var num = +($("#thumbs-up-" + id).text());
-  num++;
-  $("#thumbs-up-" + id).text(num);
-  likeCounter++;
-  database.ref("/yesCounter").set({
-    yesCount: likeCounter
-  })
-})
-
-$(".thumbs-down").on("click", function (event) {
-  event.preventDefault();
-  var id = $(this).attr("data-id");
-  var num = +($("#thumbs-down-" + id).text());
-  num++;
-  $("#thumbs-down-" + id).text(num);
-  dislikeCounter++;
-  database.ref("/noCounter").set({
-    dislikeCount: dislikeCounter
-  })
-})
-
-})
-
+  });
+    
+    // Handle the errors
+  }, function (errorObject) {
+    console.log("Errors handled: " + errorObject.code);
+});

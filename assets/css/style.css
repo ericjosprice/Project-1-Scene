@@ -87,9 +87,22 @@ body {
     margin-top: 20px;
 }
 
-.plus-icon {
+#form-submit {
+    display: block;
+    margin: auto;
+    color: #777777;
+    border: none;
+    background: #ffffff;
+    padding: 10px;
+}
+
+#bottom-buttons {
     font-size: 48px;
     text-align: center;
+}
+
+.bottom-button {
+    margin: 0px 30px 0px 30px;
 }
 
 #footer {
