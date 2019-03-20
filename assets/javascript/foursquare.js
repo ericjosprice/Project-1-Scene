@@ -1,21 +1,4 @@
-// Client ID
-// FEMSVD3N0IBIMAYZZU0DDZK3FUL3RPUI10XOPQ2YA3555ASP
-// Client Secret
-// K0H2FTFUQJM2LXRZBZVTJFADEK0K0HJZXNAXPWJFI3VK3E5P
-
-// $.ajax({
-//     url: "https://api.foursquare.com/v2/venues/categories" +"FEMSVD3N0IBIMAYZZU0DDZK3FUL3RPUI10XOPQ2YA3555ASP" + "K0H2FTFUQJM2LXRZBZVTJFADEK0K0HJZXNAXPWJFI3VK3E5P",
-//     method: "GET"
-// }).then(function(response){
-//     console.log(response)
-// });
-
-//endpoint for nearby venues/search 
-// parameters for nearby lat/long = 40.7629212,-73.9935085; query = ShopMart; intent = browse; radius = 500
-//credentials above
-//===================================================================================
 // use geolocation to get lon and lat
-
 var lat, lon, acc;
 
 var options = {
@@ -23,6 +6,13 @@ var options = {
     timeout: 50000,
     maximumAge: 10
 };
+
+// when user clicks the foursquare button run the geolocation function
+$(document).on("click", "#foursquare-button", clickedFourSquare)
+
+
+function clickedFourSquare(){
+
 
 function success(pos) {
     var crd = pos.coords;
@@ -34,7 +24,7 @@ function success(pos) {
     lat = crd.latitude;
     lon = crd.longitude;
     acc = crd.accuracy;
-
+    display();
 }
 
 function error(err) {
@@ -48,12 +38,11 @@ function display() {
     $("#lat").text(lat);
     $("#lon").text(lon);
     $("#accuracy").text(acc);
-    console.log(lat);
-    console.log(lon);
-    console.log(acc);
+    //userOrigin defined in George's logic.js file
+    //uncomment next line once George
+    // userOrigin(lat, lon);
 }
 
-setTimeout(display, 5000);
 
 // ==================================================================================
 //== get foursquare data
@@ -61,22 +50,40 @@ setTimeout(display, 5000);
 function getFoureSquareData() {
 
     var creds = "client_id=FEMSVD3N0IBIMAYZZU0DDZK3FUL3RPUI10XOPQ2YA3555ASP&client_secret=K0H2FTFUQJM2LXRZBZVTJFADEK0K0HJZXNAXPWJFI3VK3E5P";
-    var sQueryURL = 'https://api.foursquare.com/v2/venues/search?' + creds + '&v=20180323&limit=5&ll=30.2870995,-97.72883279999999&query=bars&intent=browse&radius=5000'
+
+    var sQueryURL = 'https://api.foursquare.com/v2/venues/search?' + creds + '&v=20180323&limit=5&ll=' + lat + ',' + lon + '&query=coffee&intent=browse&radius=1600'
+
+
 
     $.ajax({
         url: sQueryURL,
         method: "GET"
     }).then(function (response) {
         console.log(response);
+        for (var i = 0; i < response.response.venues.length; i++) {
+            var newDiv = $("<div>");
+            var newP = $("<p>");
+            newDiv.attr("id", i);
+            newDiv.text(response.response.venues[i].name)
+            newP.text(response.response.venues[i].location.address);
+            newDiv.append(newP);
+            $("#foursquare-data").append(newDiv);
+        }
+
+
+
     });
     console.log(sQueryURL);
-    console.log("*************");
-    $.ajax({
-        url: 'https://api.foursquare.com/v2/venues/VENUE_ID=4ce2a3b278ddf04dfde8b198/photos' + creds,
-        method: "GET"
-    }).then(function (response) {
-        console.log(response);
-    });
+
+    // the below code is an attempt to get images from foursquare. this feature will be added if there is time
+    // $.ajax({
+    //     url: 'https://api.foursquare.com/v2/venues/VENUE_ID=4ce2a3b278ddf04dfde8b198/photos' + creds,
+    //     method: "GET"
+    // }).then(function (response) {
+    //     console.log(response);
+    // });
 }
 
-setTimeout(getFoureSquareData, 7000);
+setTimeout(getFoureSquareData, 4000);
+console.log("yelp button was clicked")
+}
