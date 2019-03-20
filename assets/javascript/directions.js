@@ -1,9 +1,6 @@
 // code to get the userLocation
-
-$(document).on("click", "#get-directions", clickedFourSquare)
-
-function clickedGoogleDirections() {
-
+$(document).on("click", "#get-directions", clickedForDirections)
+function clickedForDirections() {
     navigator.geolocation.getCurrentPosition(success);
 
     function success(pos) {
