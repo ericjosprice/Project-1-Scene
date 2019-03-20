@@ -69,8 +69,14 @@ $(document).ready(function () {
       post.attr("class", key);
       var businessDisplay = $("<div>").attr("id", "business-display").text(sv.business);
       businessDisplay.attr("class", key)
+      
+
+
       var addressDisplay = $("<div>").attr("id", "address-display").text(sv.address);
-      addressDisplay.addClass(key + " address-display");
+      addressDisplay.addClass("address-display" + key);
+
+
+
       var dealDisplay = $("<div>").attr("id", "deal-display").text(sv.deal);
       dealDisplay.addClass(key);
       var timeframeDisplay = $("<div>").attr("id", "timeframe-display").text(sv.time);
@@ -88,10 +94,10 @@ $(document).ready(function () {
       var closeDirections = $("<div>").attr("id", "close-directions").addClass("far fa-times-circle listing-button" + " " + key);
 
       database.ref(key + "/likes").on("value", function (likesSnapshot) {
-        console.log(key + " got a like:", likesSnapshot.val());
+        // console.log(key + " got a like:", likesSnapshot.val());
       });
       database.ref(key + "/dislikes").on("value", function (likesSnapshot) {
-        console.log(key + " got a dislike:", likesSnapshot.val());
+        // console.log(key + " got a dislike:", likesSnapshot.val());
       });
 
       // creating the post
