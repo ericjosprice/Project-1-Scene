@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
   var config = {
     apiKey: "AIzaSyASKSOl-vh7Ctml-gBjg70xwgNB77GAdco",
     authDomain: "yayornay-a4231.firebaseapp.com",
@@ -13,6 +12,8 @@ $(document).ready(function () {
   var database = firebase.database();
 
 
+
+  
 ////////////////////////////
 // SUBMIT BUTTON FUNCTION //
 ////////////////////////////
@@ -24,6 +25,8 @@ $(document).ready(function () {
     var addressInput = $("#address-input").val().trim();
     var dealInput = $("#deal-input").val().trim();
     var timeframeInput = $("#timeframe-input").val().trim();
+    var likeCounter = 0;
+    var dislikeCounter = 0;
 
     if (businessInput === "" ||
       addressInput === "" ||
@@ -38,7 +41,9 @@ $(document).ready(function () {
         address: addressInput,
         deal: dealInput,
         time: timeframeInput,
-        dateAdded: firebase.database.ServerValue.TIMESTAMP
+        dateAdded: firebase.database.ServerValue.TIMESTAMP,
+        like : likeCounter,
+        dislike : dislikeCounter
       });
 
       // clearing the forms after submitting
@@ -49,35 +54,39 @@ $(document).ready(function () {
     }
   });
 
+
+
     // Firebase watcher .on("child_added"
     database.ref().on("child_added", function (childSnapshot) {
       // storing the snapshot.val() in a variable for convenience
       var sv = childSnapshot.val();
       var key = childSnapshot.key;
 
-      // HTML elements created with jQuery
+      // HTML elements created with jQuery 
+      //all cards and their elements have been given a unique element
       var jumbotron = $("<div>").addClass("jumbotron" + " " + key);
       var post = $("<div>").attr("id", "post");
-          post.addClass("post" + " " + key);
+      post.attr("class", key);
       var businessDisplay = $("<div>").attr("id", "business-display").text(sv.business);
-          businessDisplay.addClass("businessDisplay" + " " + key);
+      businessDisplay.attr("class", key)
       var addressDisplay = $("<div>").attr("id", "address-display").text(sv.address);
-          addressDisplay.addClass("addressDisplay" + " " + key)
+      addressDisplay.addClass(key + " address-display");
       var dealDisplay = $("<div>").attr("id", "deal-display").text(sv.deal);
-          dealDisplay.addClass("dealDisplay" + " " + key)
+      dealDisplay.addClass(key);
       var timeframeDisplay = $("<div>").attr("id", "timeframe-display").text(sv.time);
-          timeframeDisplay.addClass("timeframeDisplay" + " " + key)
-      var listingButtons = $("<div>").attr("id", "listing-buttons").addClass("listingButton" + " " + key)
-      var getDirections = $("<div>").attr("id", "get-directions").addClass("fas fa-location-arrow listing-button getDirections" + " " + key);
-      var thumbsUp = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-up listing-button thumbs-up thumbsUp" + " " + key);
-      var thumbsUpCount = $("<div>").attr("id", "thumbs-up-0").addClass("listing-value thumbsUpCount" + " " + key).text("");
-      var thumbsDown = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-down listing-button thumbs-down");
-      var thumbsDownCount = $("<div>").attr("id", "thumbs-down-0").addClass("listing-value thumbsdown" + " " + key).text("");
-      var directionsContainer = $("<div>").attr("id", "directions-container").addClass("hide directionsContainer" + " " + key);
+      timeframeDisplay.addClass(key);
+      var listingButtons = $("<div>").attr("id", "listing-buttons");
+      listingButtons.addClass(key);
+      var getDirections = $("<div>").attr("id", "get-directions").addClass("fas fa-location-arrow listing-button" + " " + key);
+      var thumbsUp = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-up listing-button thumbs-up" + " " + key);
+      var thumbsUpCount = $("<div>").attr("id", "thumbs-up-0").addClass("listing-value" + " " + key).text("");
+      var thumbsDown = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-down listing-button thumbs-down" + " " + key);
+      var thumbsDownCount = $("<div>").attr("id", "thumbs-down-0").addClass("listing-value" + " " + key).text("");
+      var directionsContainer = $("<div>").attr("id", "directions-container").addClass("hide" + " " + key);
       var directions = $("<div>").attr("id", "directions").text("THESE ARE DIRECTIONS");
-          directions.addClass("directions" + " " + key);
-      var closeDirections = $("<div>").attr("id", "close-directions").addClass("far fa-times-circle listing-button closeDirections" + " " + key);
-      
+      getDirections.attr("data-item", key);
+      var closeDirections = $("<div>").attr("id", "close-directions").addClass("far fa-times-circle listing-button" + " " + key);
+
       database.ref(key + "/likes").on("value", function (likesSnapshot) {
         console.log(key + " got a like:", likesSnapshot.val());
       });
@@ -98,17 +107,10 @@ $(document).ready(function () {
     
     }, function(errorObject) {
       console.log("The read failed: " + errorObject.code);
-    })
-
-    /////////////////////////////////////
-    // CLICK FUNCTION FOR LIKE/DISLIKE //
-    ////////////////////////////////////
-    $("#thumbs-up-0").on("click", function(){
-      event.preventDefault();
-      $(".thumbUp-" + key).text();
-
 
     })
+
+
   // Click functions for navigating the document
   $("#create-post").on("click", function () {
     $("#create-post").addClass("animated pulse");
