@@ -132,12 +132,12 @@ database.ref().on("child_added", function (childSnapshot) {
   var directions = $("<div>").attr("id", "directions").text("THESE ARE DIRECTIONS");
   var closeDirections = $("<div>").attr("id", "close-directions").addClass("far fa-times-circle listing-button");
 
-  // database.ref(key + "/likes").on("value", function (likesSnapshot) {
-  //   console.log(key + " got a like:", likesSnapshot.val());
-  // });
-  // database.ref(key + "/dislikes").on("value", function (likesSnapshot) {
-  //   console.log(key + " got a dislike:", likesSnapshot.val());
-  // });
+  database.ref(key + "/likes").on("value", function (likesSnapshot) {
+    console.log(key + " got a like:", likesSnapshot.val());
+  });
+  database.ref(key + "/dislikes").on("value", function (likesSnapshot) {
+    console.log(key + " got a dislike:", likesSnapshot.val());
+  });
 
   // creating the post
   $("#feed").prepend(jumbotron);
