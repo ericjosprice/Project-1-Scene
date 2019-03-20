@@ -66,7 +66,7 @@ $(document).ready(function () {
       var thumbsDown = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-down listing-button thumbs-down");
       var thumbsDownCount = $("<div>").attr("id", "thumbs-down-0").addClass("listing-value").text("");
       var directionsContainer = $("<div>").attr("id", "directions-container").addClass("hide");
-      var directions = $("<div>").attr("id", "directions").text("THESE ARE DIRECTIONS");
+      var directions = $("<div>").attr("id", "directions").text("");
       var closeDirections = $("<div>").attr("id", "close-directions").addClass("far fa-times-circle listing-button");
 
       database.ref(key + "/likes").on("value", function (likesSnapshot) {
@@ -108,11 +108,12 @@ $(document).ready(function () {
     $("#foursquare").toggleClass("hide").addClass("animated fadeInUp");
   });
 
-  $("#get-directions").on("click", function () {
+  $("#feed").on("click", "#get-directions", function () {
     $("#directions-container").removeClass("hide");
+    console.log("clicked")
   });
 
-  $("#close-directions").on("click", function () {
+  $("#feed").on("click", "#close-directions", function () {
     $("#directions-container").addClass("hide");
   });
 

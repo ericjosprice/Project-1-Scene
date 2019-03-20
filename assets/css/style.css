@@ -63,15 +63,10 @@ body {
     font-weight: 100;
 }
 
-/* #listing-buttons {
-    width: 90%;
-    margin: auto;
-} */
-
 .listing-button {
     color: #777777;
     font-size: 24px;
-    /* margin-left: 30px;  */
+    /* margin: 0px 30px 0px 30px; */
 }
 
 .listing-value {
