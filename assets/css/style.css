@@ -66,14 +66,18 @@ body {
 .listing-button {
     color: #777777;
     font-size: 24px;
-    /* margin: 0px 30px 0px 30px; */
+    margin-left: 10px;
+}
+
+.fa-location-arrow {
+    margin-right: 55%;
 }
 
 .listing-value {
     color: #777777;
     display: inline;
     font-size: 16px;
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 #form-title {
@@ -93,7 +97,7 @@ body {
 }
 
 #foursquare {
-    height: 500px;
+    height: 510px;
     padding: 40px;
 }
 
