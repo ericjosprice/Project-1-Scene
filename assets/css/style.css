@@ -77,6 +77,7 @@ body {
 }
 
 #form-title {
+    font-weight: 100;
     font-size: 36px;
     text-align: center;
     margin-top: 20px;
@@ -89,6 +90,15 @@ body {
     border: none;
     background: #ffffff;
     padding: 10px;
+}
+
+#foursquare {
+    height: 500px;
+    padding: 40px;
+}
+
+#foursquare-data {
+    margin-top: 40px;
 }
 
 #bottom-buttons {

@@ -15,6 +15,9 @@ $(document).ready(function () {
 
     event.preventDefault();
 
+    // Hiding the form after submission
+    $("#post-form").addClass("hide");
+
     // Form inputs
     var businessInput = $("#business-input").val().trim();
     var addressInput = $("#address-input").val().trim();
@@ -57,8 +60,14 @@ $(document).ready(function () {
       post.attr("class", key);
       var businessDisplay = $("<div>").attr("id", "business-display").text(sv.business);
       businessDisplay.attr("class", key)
+      
+
+
       var addressDisplay = $("<div>").attr("id", "address-display").text(sv.address);
-      addressDisplay.addClass(key + " address-display");
+      addressDisplay.addClass("address-display" + key);
+
+
+
       var dealDisplay = $("<div>").attr("id", "deal-display").text(sv.deal);
       dealDisplay.addClass(key);
       var timeframeDisplay = $("<div>").attr("id", "timeframe-display").text(sv.time);
@@ -70,10 +79,17 @@ $(document).ready(function () {
       var thumbsUpCount = $("<div>").attr("id", "thumbs-up-0").addClass("listing-value" + " " + key).text("");
       var thumbsDown = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-down listing-button thumbs-down" + " " + key);
       var thumbsDownCount = $("<div>").attr("id", "thumbs-down-0").addClass("listing-value" + " " + key).text("");
-      var directionsContainer = $("<div>").attr("id", "directions-container").addClass("hide" + " " + key);
-      var directions = $("<div>").attr("id", "directions").text("THESE ARE DIRECTIONS");
+      var directionsContainer = $("<div>").addClass("hide directions-container directions-container" + key);
+      var directions = $("<div>").addClass("directions" + key).text("");
       getDirections.attr("data-item", key);
       var closeDirections = $("<div>").attr("id", "close-directions").addClass("far fa-times-circle listing-button" + " " + key);
+
+      database.ref(key + "/likes").on("value", function (likesSnapshot) {
+        // console.log(key + " got a like:", likesSnapshot.val());
+      });
+      database.ref(key + "/dislikes").on("value", function (likesSnapshot) {
+        // console.log(key + " got a dislike:", likesSnapshot.val());
+      });
 
       // creating the post
       $("#feed").prepend(jumbotron);
@@ -90,29 +106,33 @@ $(document).ready(function () {
       console.log("The read failed: " + errorObject.code);
     })
 
-  // Click functions for navigating the document
-  $("#create-post").on("click", function () {
-    $("#create-post").addClass("animated pulse");
-    setTimeout(function () {
-      $("#create-post").removeClass("animated pulse")
-    }, 1000);
-    $("#post-form").toggleClass("hide").addClass("animated fadeInUp");
-  });
+    // Click functions for navigating the document
+    $("#create-post").on("click", function () {
+      $("#create-post").addClass("animated pulse");
+      setTimeout(function () {
+        $("#create-post").removeClass("animated pulse")
+      }, 1000);
+      $("#post-form").toggleClass("hide").addClass("animated fadeInUp");
+    });
 
-  $("#foursquare-button").on("click", function () {
-    $("#foursquare-button").addClass("animated pulse");
-    setTimeout(function () {
-      $("#foursquare-button").removeClass("animated pulse")
-    }, 1000);
-    $("#foursquare").toggleClass("hide").addClass("animated fadeInUp");
-  });
+    $("#foursquare-button").on("click", function () {
+      $("#foursquare-button").addClass("animated pulse");
+      setTimeout(function () {
+        $("#foursquare-button").removeClass("animated pulse")
+      }, 1000);
+      $("#foursquare").toggleClass("hide").addClass("animated fadeInUp");
+    });
 
-  $("#feed").on("click", "#get-directions", function () {
-    $("#directions-container").removeClass("hide");
-  });
+    $("#foursquare-cancel").on("click", function(){
+      $("#foursquare").toggleClass("hide");
+    })
 
-  $("#feed").on("click", "#close-directions", function () {
-    $("#directions-container").addClass("hide");
-  });
+    // $("#feed").on("click", "#get-directions", function () {
+    //   $("#directions-container").removeClass("hide");
+    // });
+
+    // $("#feed").on("click", "#close-directions", function () {
+    //   $("#directions-container").addClass("hide");
+    // });
 
 });
