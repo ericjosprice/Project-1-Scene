@@ -58,29 +58,36 @@ $(document).ready(function () {
       var businessDisplay = $("<div>").attr("id", "business-display").text(sv.business);
       businessDisplay.attr("class", key)
       var addressDisplay = $("<div>").attr("id", "address-display").text(sv.address);
-      addressDisplay.addClass(key + " address-display");
+      addressDisplay.addClass("address-display" + key);
       var dealDisplay = $("<div>").attr("id", "deal-display").text(sv.deal);
       dealDisplay.addClass(key);
       var timeframeDisplay = $("<div>").attr("id", "timeframe-display").text(sv.time);
       timeframeDisplay.addClass(key);
       var listingButtons = $("<div>").attr("id", "listing-buttons");
       listingButtons.addClass(key);
-      var getDirections = $("<div>").attr("id", "get-directions").addClass("fas fa-location-arrow listing-button" + " " + key);
-      var thumbsUp = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-up listing-button thumbs-up" + " " + key);
-      var thumbsUpCount = $("<div>").attr("id", "thumbs-up-0").addClass("listing-value" + " " + key).text("");
-      var thumbsDown = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-down listing-button thumbs-down" + " " + key);
-      var thumbsDownCount = $("<div>").attr("id", "thumbs-down-0").addClass("listing-value" + " " + key).text("");
-      var directionsContainer = $("<div>").attr("id", "directions-container").addClass("hide" + " " + key);
-      var directions = $("<div>").attr("id", "directions").text("THESE ARE DIRECTIONS");
+      //added get-directions + key so that toggle class on "this" will work
+      var getDirections = $("<div>").attr("id", "get-directions").addClass("fas fa-location-arrow listing-button" + "get-directions" + key);
       getDirections.attr("data-item", key);
+      var thumbsUp = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-up listing-button thumbs-up " + key);
+      var thumbsUpCount = $("<div>").attr("id", "thumbs-up-0").addClass("listing-value " +key).text("");
+      var thumbsDown = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-down listing-button thumbs-down "+ key);
+      var thumbsDownCount = $("<div>").attr("id", "thumbs-down-0").addClass("listing-value "+ key).text("");
+
+
+      var directionsContainer = $("<div>").attr("id", "directions-container").addClass("hide "+ key);
+
+
+      var directions = $("<div>").attr("id", "directions").text("THESE ARE DIRECTIONS");
+      directions.addClass("data-directions" + key)
       var closeDirections = $("<div>").attr("id", "close-directions").addClass("far fa-times-circle listing-button" + " " + key);
 
-      database.ref(key + "/likes").on("value", function (likesSnapshot) {
-        console.log(key + " got a like:", likesSnapshot.val());
-      });
-      database.ref(key + "/dislikes").on("value", function (likesSnapshot) {
-        console.log(key + " got a dislike:", likesSnapshot.val());
-      });
+      //needed for thumbs up and thumbs down
+      // database.ref(key + "/likes").on("value", function (likesSnapshot) {
+      //   // console.log(key + " got a like:", likesSnapshot.val());
+      // });
+      // database.ref(key + "/dislikes").on("value", function (likesSnapshot) {
+      //   // console.log(key + " got a dislike:", likesSnapshot.val());
+      // });
 
       // creating the post
       $("#feed").prepend(jumbotron);
@@ -114,12 +121,26 @@ $(document).ready(function () {
     $("#foursquare").toggleClass("hide").addClass("animated fadeInUp");
   });
 
-  $("#get-directions").on("click", function () {
-    $("#directions-container").removeClass("hide");
+
+  $(document).on("click", ".get-directions", function () {
+    var sKeyValue = $(this).attr("data-item");
+    console.log("we want to unhide the div. what is: " + sKeyValue)
+    $(".hide " + sKeyValue).removeClass("hide")
+  
   });
 
-  $("#close-directions").on("click", function () {
-    $("#directions-container").addClass("hide");
-  });
+  // $(document).on("click", ".get-directions", function () {
+  //   var sKeyValue = $(this).attr("data-item");
+  //   console.log("we want to hid the div. what is: " + sKeyValue)
+  //   $(this).addClass("hide");
+  // });
+
+  // $("#get-directions").on("click", function () {
+  //   $("#directions-container").removeClass("hide");
+  // });
+
+  // $("#close-directions").on("click", function () {
+  //   $("#directions-container").addClass("hide");
+  // });
 
 });
