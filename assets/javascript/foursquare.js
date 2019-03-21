@@ -59,6 +59,7 @@ function getFoureSquareData() {
         url: sQueryURL,
         method: "GET"
     }).then(function (response) {
+        $("#foursquare-data").empty();
         console.log(response);
         for (var i = 0; i < response.response.venues.length; i++) {
             var newDiv = $("<div>");
@@ -67,6 +68,8 @@ function getFoureSquareData() {
             newDiv.text(response.response.venues[i].name)
             newP.text(response.response.venues[i].location.address);
             newDiv.append(newP);
+
+            
             $("#foursquare-data").append(newDiv);
         }
 
