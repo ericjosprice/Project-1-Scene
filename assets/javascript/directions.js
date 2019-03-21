@@ -79,17 +79,15 @@ $(document).ready(function () {
                 $(".data-directions" + key).text(walkingJourney);
             }
 
-
-            // for(var i = 0; i < steps.length; i++){
-            //     response.routes[1].legs[4].steps[i].html_instructions
-
-            // }
-
-
-
+            var linkToGoogleMaps = "https://www.google.com/maps/dir/?api=1&origin=" + userOrigin + "&destination=" + busAddress + "&mode=walking"
+            console.log(linkToGoogleMaps);
 
         });
     };
+
+    
+        
+    
 
 
     // attempt to create a google maps URL ======================================== 
