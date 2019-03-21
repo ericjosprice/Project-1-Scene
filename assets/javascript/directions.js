@@ -1,3 +1,5 @@
+
+
 $(document).ready(function () {
 
     var userOrigin;
@@ -30,6 +32,9 @@ $(document).ready(function () {
 
     function clickedForDirections(key) {
         console.log("clickedForDirections", key);
+        //display hiden directions div
+        $(".directions-container" + key).removeClass("hide")
+
         // .oneClass.secondClass
         // gets the adress of the business directly from the display card
         var BusStreetAddress = $(".address-display" + key).text().trim();
@@ -76,7 +81,7 @@ $(document).ready(function () {
                 // $("#directions").html(walkingJourney);
                 // $("#directions-container").html(walkingJourney);
 
-                $(".data-directions" + key).text(walkingJourney);
+                $(".data-directions" + key).html(walkingJourney);
             }
 
 
