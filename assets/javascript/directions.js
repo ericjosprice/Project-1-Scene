@@ -85,20 +85,14 @@ $(document).ready(function () {
             }
 
             var linkToGoogleMaps = "https://www.google.com/maps/dir/?api=1&origin=" + userOrigin + "&destination=" + busAddress + "&mode=walking"
+            // var displayHyperlink = "<p><a href=" + linkToGoogleMaps + "target='_blank'" + ">Open in Google</a></p>"
+            var displayHyperlink = `<p><a href="${linkToGoogleMaps}" target='_blank'>Open in Google Maps</a></p>`
+
             console.log(linkToGoogleMaps);
+            walkingJourney.append(displayHyperlink);
 
         });
     };
-
-    
-        
-    
-
-
-    // attempt to create a google maps URL ======================================== 
-    //  var googleMapsURL = "https://www.google.com/maps/dir/?api=1&origin=" + userOrigin + "&destination=" + busAddress + "&mode=walking"
-    //  console.log(googleMapsURL);
-    // ================================================================================
 
 
 });
