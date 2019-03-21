@@ -29,7 +29,6 @@ $(document).ready(function () {
         }
     }
 
-
     function clickedForDirections(key) {
         console.log("clickedForDirections", key);
         //display hiden directions div
@@ -38,6 +37,8 @@ $(document).ready(function () {
         // .oneClass.secondClass
         // gets the adress of the business directly from the display card
         var BusStreetAddress = $(".address-display" + key).text().trim();
+
+        $(".directions-container"+ key).removeClass("hide");
 
         // str = str.replace(/\s+/g, '');
         console.log("BusStreetAddress " + BusStreetAddress.replace(/\s+/g, '+'));
@@ -85,23 +86,15 @@ $(document).ready(function () {
             }
 
 
-            // for(var i = 0; i < steps.length; i++){
-            //     response.routes[1].legs[4].steps[i].html_instructions
+            var linkToGoogleMaps = "https://www.google.com/maps/dir/?api=1&origin=" + userOrigin + "&destination=" + busAddress + "&mode=walking"
+            // var displayHyperlink = "<p><a href=" + linkToGoogleMaps + "target='_blank'" + ">Open in Google</a></p>"
+            var displayHyperlink = `<p><a href="${linkToGoogleMaps}" target='_blank'>Open in Google Maps</a></p>`
 
-            // }
-
-
-
+            console.log(linkToGoogleMaps);
+            walkingJourney.append(displayHyperlink);
 
         });
     };
-
-
-    // attempt to create a google maps URL ======================================== 
-    //  var googleMapsURL = "https://www.google.com/maps/dir/?api=1&origin=" + userOrigin + "&destination=" + busAddress + "&mode=walking"
-    //  console.log(googleMapsURL);
-    // ================================================================================
-
 
 });
 
