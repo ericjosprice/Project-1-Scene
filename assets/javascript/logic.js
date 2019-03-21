@@ -1,5 +1,4 @@
-$(document).ready(function() {
-
+$(document).ready(function () {
   var config = {
     apiKey: "AIzaSyASKSOl-vh7Ctml-gBjg70xwgNB77GAdco",
     authDomain: "yayornay-a4231.firebaseapp.com",
@@ -10,150 +9,143 @@ $(document).ready(function() {
   };
 
   firebase.initializeApp(config);
+
   var database = firebase.database();
 
-// Wes' code starts
+  $("#form-submit").on("click", function () {
 
-  $("#create-post").on("click", function(){
-    $("#create-post").addClass("animated pulse");
-    setTimeout(function(){
-        $("#create-post").removeClass("animated pulse") 
-    }, 1000);
-    $("#post-form").toggleClass("hide").addClass("animated fadeInUp");
-  });
-
-  $("#foursquare-button").on("click", function(){
-    $("#foursquare-button").addClass("animated pulse");
-    setTimeout(function(){
-        $("#foursquare-button").removeClass("animated pulse") 
-    }, 1000);
-    $("#foursquare").toggleClass("hide").addClass("animated fadeInUp");
-  });
-
-  $("#get-directions").on("click", function(){
-    $("#directions-container").removeClass("hide");
-  });
-
-  $("#close-directions").on("click", function(){
-    $("#directions-container").addClass("hide");
-  });
-
+    event.preventDefault();
+    $("#post-form").addClass("hide");
 
 //////////////////////////////////////////
 //LIKE AND DISLIKE FUNCTION FOR LATER...//
 //////////////////////////////////////////  
 
-//initialize variables
-  // var likeCounter = 0;
-  // var dislikeCounter = 0;
-  
-  // $(".thumbs-up").on("click", function (event) {
-  //     event.preventDefault();
-  //     var id = $(this).attr("data-id");
-  //     var num = +($("#thumbs-up-" + id).text());
-  //     num++;
-  //     $("#thumbs-up-" + id).text(num);
-  //     likeCounter++;
-  //   database.ref("/yesCounter").set({
-  //     yesCount: likeCounter
-  //   })
-  // })
-  
-  // $(".thumbs-down").on("click", function (event) {
-  //     event.preventDefault();
-  //     var id = $(this).attr("data-id");
-  //     var num = +($("#thumbs-down-" + id).text());
-  //     num++;
-  //     $("#thumbs-down-" + id).text(num);
-  //     dislikeCounter++;
-  //   database.ref("/noCounter").set({
-  //     dislikeCount: dislikeCounter
-  //   })
-  // })
-
-
-
-  //////////////////////////////
-  // STORING STUFF IN FIREBASE//
-  //////////////////////////////
-  // Firebase watcher .on("child_added")
-  database.ref().on("child_added", function (childSnapshot) {
-    // storing the snapshot.val() in a variable for convenience
-    var sv = childSnapshot.val();
-
-    // Dynamically created cards and storing values in firebase
-    var jumbotron = $("<div>").addClass("jumbotron");
-    var post = $("<div>").attr("id", "post");
-    var businessDisplay = $("<div>").attr("id", "business-display").text(sv.business);
-    var addressDisplay = $("<div>").attr("id", "address-display").text(sv.address);
-    var dealDisplay = $("<div>").attr("id", "deal-display").text(sv.deal);
-    var timeframeDisplay = $("<div>").attr("id", "timeframe-display").text(sv.time);
-    var listingButtons = $("<div>").attr("id", "listing-buttons");
-    var getDirections = $("<div>").attr("id", "get-directions").addClass("fas fa-location-arrow listing-button");
-    var thumbsUp = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-up listing-button thumbs-up");
-    var thumbsUpCount = $("<div>").attr("id", "thumbs-up-0").addClass("listing-value").text("");
-    var thumbsDown = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-down listing-button thumbs-down");
-    var thumbsDownCount = $("<div>").attr("id", "thumbs-down-0").addClass("listing-value").text("");
-    var directionsContainer = $("<div>").attr("id", "directions-container").addClass("hide");
-    var directions = $("<div>").attr("id", "directions").text("THESE ARE DIRECTIONS");
-    var closeDirections = $("<div>").attr("id", "close-directions").addClass("far fa-times-circle listing-button");
-
-    database.ref(key + "/likes").on("value", function (likesSnapshot) {
-      console.log(key + " got a like:", likesSnapshot.val());
-    });
-    database.ref(key + "/dislikes").on("value", function (likesSnapshot) {
-      console.log(key + " got a dislike:", likesSnapshot.val());
-    });
-
-    // creating the post to HTML with the above variables linked to firebase
-    $("#feed").prepend(jumbotron);
-    jumbotron.append(post);
-    post.append(businessDisplay, addressDisplay, dealDisplay, timeframeDisplay);
-    post.append("<hr>");
-    post.append(listingButtons);
-    listingButtons.append(getDirections, thumbsUp, thumbsUpCount, thumbsDown, thumbsDownCount);
-    jumbotron.append(directionsContainer);
-    directionsContainer.append("<hr>");
-    directionsContainer.append(directions, closeDirections);
-  });
-
-  /////////////////////////
-  //FORM SUBMIT FUNCTION///
-  /////////////////////////
-  $("#form-submit").on("click", function(){
-    event.preventDefault();
-
-    // Form inputs
-    var businessInput = $("#business-input").val().trim();
-    var addressInput = $("#address-input").val().trim();
-    var dealInput = $("#deal-input").val().trim();
-    var timeframeInput = $("#timeframe-input").val().trim();
-
     if (businessInput === "" ||
-        addressInput === "" ||
-        dealInput === "" ||
-        timeframeInput === "") {
-        alert("Complete all fields to continue.");
-        return;
+      addressInput === "" ||
+      dealInput === "" ||
+      timeframeInput === "") {
+      alert("Complete all fields to continue.");
+      return;
     } else {
-        // Code for handling the push into firebase
-        database.ref().push({
-            business: businessInput,
-            address: addressInput,
-            deal: dealInput,
-            time: timeframeInput,
-            dateAdded: firebase.database.ServerValue.TIMESTAMP
-        });
+      // Code for handling the push
+      database.ref().push({
+        business: businessInput,
+        address: addressInput,
+        deal: dealInput,
+        time: timeframeInput,
+        dateAdded: firebase.database.ServerValue.TIMESTAMP
+      });
 
+      // clearing the forms after submitting
       $("#business-input").val("")
       $("#address-input").val("")
       $("#deal-input").val("")
       $("#timeframe-input").val("")
     }
-
   });
+    // Firebase watcher .on("child_added"
+    database.ref().on("child_added", function (childSnapshot) {
+      // storing the snapshot.val() in a variable for convenience
+      var sv = childSnapshot.val();
+      var key = childSnapshot.key;
+
+      // HTML elements created with jQuery 
+      //all cards and their elements have been given a unique element
+      var jumbotron = $("<div>").addClass("jumbotron" + " " + key);
+      var post = $("<div>").attr("id", "post");
+      post.attr("class", key);
+      var businessDisplay = $("<div>").attr("id", "business-display").text(sv.business);
+      businessDisplay.attr("class", key)
+      var addressDisplay = $("<div>").attr("id", "address-display").text(sv.address);
+      addressDisplay.addClass("address-display" + key);
+      var dealDisplay = $("<div>").attr("id", "deal-display").text(sv.deal);
+      dealDisplay.addClass(key);
+      var timeframeDisplay = $("<div>").attr("id", "timeframe-display").text(sv.time);
+      timeframeDisplay.addClass(key);
+      var listingButtons = $("<div>").attr("id", "listing-buttons");
+      listingButtons.addClass(key);
+      //added get-directions + key so that toggle class on "this" will work
+      var getDirections = $("<div>").attr("id", "get-directions").addClass("fas fa-location-arrow listing-button" + "get-directions" + key);
+      getDirections.attr("data-item", key);
+      var thumbsUp = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-up listing-button thumbs-up " + key);
+      var thumbsUpCount = $("<div>").attr("id", "thumbs-up-0").addClass("listing-value " +key).text("");
+      var thumbsDown = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-down listing-button thumbs-down "+ key);
+      var thumbsDownCount = $("<div>").attr("id", "thumbs-down-0").addClass("listing-value "+ key).text("");
+
+
+      var directionsContainer = $("<div>").attr("id", "directions-container").addClass("hide directions-container"+ key);
+
+
+      var directions = $("<div>").attr("id", "directions").text("THESE ARE DIRECTIONS");
+      directions.addClass("data-directions" + key)
+      var closeDirections = $("<div>").attr("id", "close-directions").addClass("far fa-times-circle listing-button").attr("key-value", key);
+
+      //needed for thumbs up and thumbs down
+      // database.ref(key + "/likes").on("value", function (likesSnapshot) {
+      //   // console.log(key + " got a like:", likesSnapshot.val());
+      // });
+      // database.ref(key + "/dislikes").on("value", function (likesSnapshot) {
+      //   // console.log(key + " got a dislike:", likesSnapshot.val());
+      // });
+
+      // creating the post
+      $("#feed").prepend(jumbotron);
+      jumbotron.append(post);
+      post.append(businessDisplay, addressDisplay, dealDisplay, timeframeDisplay);
+      post.append("<hr>");
+      post.append(listingButtons);
+      listingButtons.append(getDirections, thumbsUp, thumbsUpCount, thumbsDown, thumbsDownCount);
+      jumbotron.append(directionsContainer);
+      directionsContainer.append("<hr>");
+      directionsContainer.append(directions, closeDirections);
     
-    // Handle the errors
-  }, function (errorObject) {
-    console.log("Errors handled: " + errorObject.code);
+    }, function(errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    })
+
+  // Click functions for navigating the document
+  $("#create-post").on("click", function () {
+    $("#create-post").addClass("animated pulse");
+    setTimeout(function () {
+      $("#create-post").removeClass("animated pulse")
+    }, 1000);
+    $("#post-form").toggleClass("hide").addClass("animated fadeInUp");
+  });
+
+  $("#foursquare-button").on("click", function () {
+    $("#foursquare-button").addClass("animated pulse");
+    setTimeout(function () {
+      $("#foursquare-button").removeClass("animated pulse")
+    }, 1000);
+    $("#foursquare").toggleClass("hide").addClass("animated fadeInUp");
+  });
+
+
+  // $(document).on("click", ".get-directions", function () {
+  //   var sKeyValue = $(this).attr("data-item");
+  //   console.log("we want to unhide the div. what is: " + sKeyValue)
+  //   $(".hide " + sKeyValue).removeClass("hide")
+  
+  // });
+
+  // $(document).on("click", ".get-directions", function () {
+  //   var sKeyValue = $(this).attr("data-item");
+  //   console.log("we want to hid the div. what is: " + sKeyValue)
+  //   $(this).addClass("hide");
+  // });
+
+  // $("#get-directions").on("click", function () {
+  //   $("#directions-container").removeClass("hide");
+  // });
+
+  $(document).on("click", "#close-directions", function () {
+    var sKey = $(this).attr("key-value")
+    console.log("close has been clicked for key: " + sKey);
+    $(".directions-container"+ sKey).addClass("hide");
+  });
+  // $("#close-directions").on("click", function () {
+  //   $("#directions-container").addClass("hide");
+  // });
+
 });
