@@ -62,15 +62,17 @@ function getFoureSquareData() {
         $("#foursquare-data").empty();
         console.log(response);
         for (var i = 0; i < response.response.venues.length; i++) {
-            var newDiv = $("<div>");
+            var newDiv = $("<div>").addClass("foursquare-name");
             var newP = $("<p>");
             newDiv.attr("id", i);
             newDiv.text(response.response.venues[i].name)
             newP.text(response.response.venues[i].location.address);
-            newDiv.append(newP);
+            newP.append("<hr>");
+            // newDiv.append(newP);
 
             
             $("#foursquare-data").append(newDiv);
+            $("#foursquare-data").append(newP);
         }
 
 

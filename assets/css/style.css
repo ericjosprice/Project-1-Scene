@@ -105,6 +105,10 @@ body {
     margin-top: 40px;
 }
 
+.foursquare-name {
+    font-weight: bold;
+}
+
 #bottom-buttons {
     font-size: 48px;
     text-align: center;
