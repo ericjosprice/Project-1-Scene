@@ -29,7 +29,6 @@ $(document).ready(function () {
         }
     }
 
-
     function clickedForDirections(key) {
         console.log("clickedForDirections", key);
         //display hiden directions div
@@ -38,6 +37,8 @@ $(document).ready(function () {
         // .oneClass.secondClass
         // gets the adress of the business directly from the display card
         var BusStreetAddress = $(".address-display" + key).text().trim();
+
+        $(".directions-container"+ key).removeClass("hide");
 
         // str = str.replace(/\s+/g, '');
         console.log("BusStreetAddress " + BusStreetAddress.replace(/\s+/g, '+'));

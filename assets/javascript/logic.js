@@ -141,7 +141,7 @@ $(document).on("click", ".fa-thumbs-down", function() {
       var listingButtons = $("<div>").attr("id", "listing-buttons");
       listingButtons.addClass(key);
       //added get-directions + key so that toggle class on "this" will work
-      var getDirections = $("<div>").attr("id", "get-directions").addClass("fas fa-location-arrow listing-button" + "get-directions" + key);
+      var getDirections = $("<div>").attr("id", "get-directions").addClass("fas fa-location-arrow listing-button get-directions" + key);
       getDirections.attr("data-item", key);
       var thumbsUp = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-up listing-button thumbs-up" + " " + key);
       var thumbsUpCount = $("<div>").attr("id", "thumbs-up-count-" + key).addClass("listing-value" + " " + key).text(sv.like);
@@ -153,7 +153,7 @@ $(document).on("click", ".fa-thumbs-down", function() {
       var directionsContainer = $("<div>").attr("id", "directions-container").addClass("hide directions-container"+ key);
 
 
-      var directions = $("<div>").attr("id", "directions").text("THESE ARE DIRECTIONS");
+      var directions = $("<div>").attr("id", "directions").text("");
       directions.addClass("data-directions" + key)
       var closeDirections = $("<div>").attr("id", "close-directions").addClass("far fa-times-circle listing-button").attr("key-value", key);
 
@@ -198,6 +198,10 @@ $(document).on("click", ".fa-thumbs-down", function() {
       $("#foursquare-button").removeClass("animated pulse")
     }, 1000);
     $("#foursquare").toggleClass("hide").addClass("animated fadeInUp");
+  });
+
+  $("#foursquare-cancel").on("click", function(){
+    $("#foursquare").addClass("hide");
   });
 
 
