@@ -14,6 +14,7 @@ $(document).ready(function () {
   $("#form-submit").on("click", function () {
 
     event.preventDefault();
+    $("#post-form").addClass("hide");
 
     // Form inputs
     var businessInput = $("#business-input").val().trim();
