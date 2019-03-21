@@ -71,7 +71,7 @@ $(document).ready(function () {
       timeframeDisplay.addClass(key);
       var listingButtons = $("<div>").attr("id", "listing-buttons");
       listingButtons.addClass(key);
-      var getDirections = $("<div>").attr("id", "get-directions").addClass("fas fa-location-arrow listing-button" + " " + key);
+      var getDirections = $("<div>").attr("id", "get-directions").addClass("fas fa-location-arrow listing-button" + "get-directions" + key);
       var thumbsUp = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-up listing-button thumbs-up" + " " + key);
       var thumbsUpCount = $("<div>").attr("id", "thumbs-up-0").addClass("listing-value" + " " + key).text("");
       var thumbsDown = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-down listing-button thumbs-down" + " " + key);
