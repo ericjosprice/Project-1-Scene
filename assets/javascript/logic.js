@@ -115,6 +115,7 @@ $(document).on("click", ".fa-thumbs-down", function() {
   updateDislikes(dislikeClass);
 })
 
+
   ////////////////////////////////////////
   // Firebase watcher .on("child_added" //
   ////////////////////////////////////////
@@ -152,19 +153,26 @@ $(document).on("click", ".fa-thumbs-down", function() {
 
       var directionsContainer = $("<div>").attr("id", "directions-container").addClass("hide directions-container"+ key);
 
-
       var directions = $("<div>").attr("id", "directions").text("THESE ARE DIRECTIONS");
       directions.addClass("data-directions" + key)
       var closeDirections = $("<div>").attr("id", "close-directions").addClass("far fa-times-circle listing-button").attr("key-value", key);
 
-      //needed for thumbs up and thumbs down
-      // database.ref(key + "/likes").on("value", function (likesSnapshot) {
-      //   // console.log(key + " got a like:", likesSnapshot.val());
-      // });
-      // database.ref(key + "/dislikes").on("value", function (likesSnapshot) {
-      //   // console.log(key + " got a dislike:", likesSnapshot.val());
-      // });
 
+      database.ref("/" + key + "/like").on("value", function(snapShotUp) {
+        var updateUp = snapShotUp.val();
+        var thumbsUp = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-up listing-button thumbs-up" + " " + key);
+        var thumbsUpCount = $("<div>").attr("id", "thumbs-up-count-" + key).addClass("listing-value" + " " + key).text(updateUp);
+        thumbsUp.attr("data-item", key);
+        console.log(updateUp)
+       })
+
+       database.ref("/" + key + "/dislike").on("value", function(snapShotDown) {
+        var updateDown = snapShotDown.val();
+        var thumbsDown = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-down listing-button thumbs-down" + " " + key);
+        var thumbsDownCount = $("<div>").attr("id", "thumbs-down-count-" + key).addClass("listing-value" + " " + key).text(updateDown);
+        thumbsDown.attr("data-item", key);
+       })
+       
 
       // creating the post
       $("#feed").prepend(jumbotron);
