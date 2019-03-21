@@ -54,14 +54,75 @@ $(document).ready(function () {
     }
   });
 
+  var likeClickVal = 0;
+  ///////////////////////////////////
+  // like/dislike button functions///
+  ///////////////////////////////////
+  function updateLikes(key) {
+    var updatedCurrentClicks;
+    database.ref("/" + key + "/like").transaction(function(currentClicks) {
+    ///manually done toggle button...///
+    if(likeClickVal === 1) {
+      updatedCurrentClicks = (currentClicks || 0) - 1;
+    }
+    else {
+      updatedCurrentClicks = (currentClicks || 0) + 1;
+    }
+    return updatedCurrentClicks;
+      });
+          
+    if(likeClickVal == 1) {
+    likeClickVal = 0;
+    }
+    else {
+    likeClickVal = 1;
+    }
+    $("#thumbs-up-count-" + key).html(updatedCurrentClicks); 
+   };
 
+  var dislikeClickVal = 0;
+  function updateDislikes(key) {
+    var updatedCurrentClicks;
+    database.ref("/" + key + "/dislike").transaction(function(currentClicks) {
+    ///manually done toggle button...///
+    if(dislikeClickVal === 1) {
+      updatedCurrentClicks = (currentClicks || 0) - 1;
+    }
+    else {
+      updatedCurrentClicks = (currentClicks || 0) + 1;
+    }
+      return updatedCurrentClicks;
+    });
 
-    // Firebase watcher .on("child_added"
+    if(dislikeClickVal == 1) {
+      dislikeClickVal = 0;
+    }
+    else {
+      dislikeClickVal = 1;
+    }
+    $("#thumbs-down-count-" + key).html(updatedCurrentClicks);
+  };
+
+$(document).on("click", ".fa-thumbs-up", function() {
+   var likeClass = $(this).attr("data-item");
+   updateLikes(likeClass);
+})
+
+$(document).on("click", ".fa-thumbs-down", function() {
+  var dislikeClass = $(this).attr("data-item");
+  updateDislikes(dislikeClass);
+})
+
+  ////////////////////////////////////////
+  // Firebase watcher .on("child_added" //
+  ////////////////////////////////////////
     database.ref().on("child_added", function (childSnapshot) {
       // storing the snapshot.val() in a variable for convenience
       var sv = childSnapshot.val();
       var key = childSnapshot.key;
 
+      console.log(sv);
+      console.log(key);
       // HTML elements created with jQuery 
       //all cards and their elements have been given a unique element
       var jumbotron = $("<div>").addClass("jumbotron" + " " + key);
@@ -85,20 +146,24 @@ $(document).ready(function () {
       listingButtons.addClass(key);
       var getDirections = $("<div>").attr("id", "get-directions").addClass("fas fa-location-arrow listing-button" + " " + key);
       var thumbsUp = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-up listing-button thumbs-up" + " " + key);
-      var thumbsUpCount = $("<div>").attr("id", "thumbs-up-0").addClass("listing-value" + " " + key).text("");
+      var thumbsUpCount = $("<div>").attr("id", "thumbs-up-count-" + key).addClass("listing-value" + " " + key).text(sv.like);
       var thumbsDown = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-down listing-button thumbs-down" + " " + key);
-      var thumbsDownCount = $("<div>").attr("id", "thumbs-down-0").addClass("listing-value" + " " + key).text("");
+      var thumbsDownCount = $("<div>").attr("id", "thumbs-down-count-" + key).addClass("listing-value" + " " + key).text(sv.dislike);
       var directionsContainer = $("<div>").attr("id", "directions-container").addClass("hide" + " " + key);
       var directions = $("<div>").attr("id", "directions").text("THESE ARE DIRECTIONS");
       getDirections.attr("data-item", key);
+      //added this to make them unique for function
+      thumbsUp.attr("data-item", key);
+      thumbsDown.attr("data-item", key);
       var closeDirections = $("<div>").attr("id", "close-directions").addClass("far fa-times-circle listing-button" + " " + key);
 
-      database.ref(key + "/likes").on("value", function (likesSnapshot) {
-        // console.log(key + " got a like:", likesSnapshot.val());
-      });
-      database.ref(key + "/dislikes").on("value", function (likesSnapshot) {
-        // console.log(key + " got a dislike:", likesSnapshot.val());
-      });
+      // database.ref(key + "/likes").on("value", function (likesSnapshot) {
+      //   // console.log(key + " got a like:", likesSnapshot.val());
+      // });
+      // database.ref(key + "/dislikes").on("value", function (likesSnapshot) {
+      //   // console.log(key + " got a dislike:", likesSnapshot.val());
+      // });
+
 
       // creating the post
       $("#feed").prepend(jumbotron);
