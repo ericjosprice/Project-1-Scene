@@ -3,8 +3,8 @@
 $(document).ready(function () {
 
     var userOrigin;
-    var lon;
-    var lat; 
+    var busAddress;
+
     // code to get the userLocation
     $(document).on("click", ".fa-location-arrow", locationConsent)
     function locationConsent() {
@@ -32,49 +32,80 @@ $(document).ready(function () {
 
     function clickedForDirections(key) {
         console.log("clickedForDirections", key);
-        $(".data-directions" + key).text("strut'n dat ass");
+        //display hiden directions div
+        $(".directions-container" + key).removeClass("hide")
+
         // .oneClass.secondClass
         // gets the adress of the business directly from the display card
-        var BusStreetAddress = $(".address-display" + key).text();
+        var BusStreetAddress = $(".address-display" + key).text().trim();
 
         // str = str.replace(/\s+/g, '');
-//         console.log("BusStreetAddress " + BusStreetAddress.replace(/\s+/g, '+'));
-//         // add the city and state to the BusStreeAddress for the sake of ease
-//         var busAddress = BusStreetAddress.replace(/\s+/g, '+') + "+Austin" + "+TX"
+        console.log("BusStreetAddress " + BusStreetAddress.replace(/\s+/g, '+'));
+        // add the city and state to the BusStreeAddress
 
-//         // generating the queryURL for the AJAX call
-//         var directionsQueryURL = "https://cors-ut-bootcamp.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=" + userOrigin + "&destination=" + busAddress + "&mode=walking&key=AIzaSyDBhbUBfUV_wtqtndcEiMxklXGIeIjITWw";
+        busAddress = BusStreetAddress.replace(/\s+/g, '+') + "+Austin" + "+TX"
 
-//         console.log(directionsQueryURL);
-// console.log("click - is this the same key: " + key)
-//         // ajax call
-//         $.ajax({
-//             url: directionsQueryURL,
-//             method: "GET"
-//         }).then(function (response) {
-//             console.log("after response - is this the same key" + key)
-//             // creating the directions div to hold each leg of the journey
-//             var walkingJourney = $("<div id='journey-legs'>");
+        // generating the queryURL for the AJAX call
+        var directionsQueryURL = "https://cors-ut-bootcamp.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=" + userOrigin + "&destination=" + busAddress + "&mode=walking&key=AIzaSyAWVvEMYJEt9Bq0oqqA1FE156FHs86msTg"
 
-//             var routeArray = response.routes[0].legs[0].steps
 
-//             // this for loop, cycles through the array and pulls out the HTML walking directions 
-//             for (var i = 0; i < routeArray.length; i++) {
-//                 // console.log(routeArray[i].html_instructions);
+        console.log(directionsQueryURL);
 
-//                 // puts each of the legs into a <p> tag so that they can be display one-by-one rather than as an entire string
-//                 var directionsToBusiness = $("<p>" + routeArray[i].html_instructions + "</p>");
+        // ajax call
+        $.ajax({
+            url: directionsQueryURL,
+            method: "GET"
+        }).then(function (response) {
+            // creating the directions div to hold each leg of the journey
+            var walkingJourney = $("<div id='journey-legs'>");
 
-//                 // appends each leg with a <p> to the walkingJourney div created up top
-//                 walkingJourney.append(directionsToBusiness);
-//                 // calls the HTML id to display the directions on the DOM
-//                 // $("#directions").html(walkingJourney);
-//                 // $("#directions-container").html(walkingJourney); ====> this line was working this morning
-//                 $(".data-directions" + key).text(walkingJourney); /// >>> reminder: this works but it wont work if the ajax call fails. move it directly under the click listener to see the magic
-//                 console.log("strutt'n: " + key)
-                
-//             }
+            console.log(response);
+            var routeArray = response.routes[0].legs[0].steps
 
-//         });
+            // var routeArray = response.routes[1].legs[4].steps
+
+            // console.log("This should be the routeArray " + routeArray);
+
+            // this for loop, cycles through the array and pulls out the HTML walking directions 
+            for (var i = 0; i < routeArray.length; i++) {
+                console.log(routeArray[i].html_instructions);
+
+                // puts each of the legs into a <p> tag so that they can be display one-by-one rather than as an entire string
+                var directionsToBusiness = $("<p>" + routeArray[i].html_instructions + "</p>");
+
+                // console.log(directionsToBusiness);
+                // appends each leg with a <p> to the walkingJourney div created up top
+                walkingJourney.append(directionsToBusiness);
+                // console.log(walkingJourney);
+                // calls the HTML id to display the directions on the DOM
+                // $("#directions").html(walkingJourney);
+                // $("#directions-container").html(walkingJourney);
+
+                $(".data-directions" + key).html(walkingJourney);
+            }
+
+
+            // for(var i = 0; i < steps.length; i++){
+            //     response.routes[1].legs[4].steps[i].html_instructions
+
+            // }
+
+
+
+
+        });
     };
+
+
+    // attempt to create a google maps URL ======================================== 
+    //  var googleMapsURL = "https://www.google.com/maps/dir/?api=1&origin=" + userOrigin + "&destination=" + busAddress + "&mode=walking"
+    //  console.log(googleMapsURL);
+    // ================================================================================
+
+
 });
+
+
+
+
+

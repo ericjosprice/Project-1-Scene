@@ -74,12 +74,12 @@ $(document).ready(function () {
       var thumbsDownCount = $("<div>").attr("id", "thumbs-down-0").addClass("listing-value "+ key).text("");
 
 
-      var directionsContainer = $("<div>").attr("id", "directions-container").addClass("hide "+ key);
+      var directionsContainer = $("<div>").attr("id", "directions-container").addClass("hide directions-container"+ key);
 
 
       var directions = $("<div>").attr("id", "directions").text("THESE ARE DIRECTIONS");
       directions.addClass("data-directions" + key)
-      var closeDirections = $("<div>").attr("id", "close-directions").addClass("far fa-times-circle listing-button" + " " + key);
+      var closeDirections = $("<div>").attr("id", "close-directions").addClass("far fa-times-circle listing-button").attr("key-value", key);
 
       //needed for thumbs up and thumbs down
       // database.ref(key + "/likes").on("value", function (likesSnapshot) {
@@ -122,12 +122,12 @@ $(document).ready(function () {
   });
 
 
-  $(document).on("click", ".get-directions", function () {
-    var sKeyValue = $(this).attr("data-item");
-    console.log("we want to unhide the div. what is: " + sKeyValue)
-    $(".hide " + sKeyValue).removeClass("hide")
+  // $(document).on("click", ".get-directions", function () {
+  //   var sKeyValue = $(this).attr("data-item");
+  //   console.log("we want to unhide the div. what is: " + sKeyValue)
+  //   $(".hide " + sKeyValue).removeClass("hide")
   
-  });
+  // });
 
   // $(document).on("click", ".get-directions", function () {
   //   var sKeyValue = $(this).attr("data-item");
@@ -139,6 +139,11 @@ $(document).ready(function () {
   //   $("#directions-container").removeClass("hide");
   // });
 
+  $(document).on("click", "#close-directions", function () {
+    var sKey = $(this).attr("key-value")
+    console.log("close has been clicked for key: " + sKey);
+    $(".directions-container"+ sKey).addClass("hide");
+  });
   // $("#close-directions").on("click", function () {
   //   $("#directions-container").addClass("hide");
   // });
