@@ -15,7 +15,6 @@ $(document).ready(function () {
   ////////////////////////////
   // SUBMIT BUTTON FUNCTION //
   ////////////////////////////
-
   $("#form-submit").on("click", function () {
     event.preventDefault();
 
@@ -25,30 +24,28 @@ $(document).ready(function () {
     var businessInput = $("#business-input").val().trim();
     var addressInput = $("#address-input").val().trim();
     var dealInput = $("#deal-input").val().trim();
-    var timeframeInput = $("#timeframe-input").val().trim();
+    // var timeframeInput = $("#timeframe-input").val().trim();
+    var startTimeInput = $("#time-start-input").val();
+    var endTimeInput = $("#time-end-input").val();
     var likeCounter = 0;
     var dislikeCounter = 0;
-
-
-    $("#form-submit").disabled = true;
-    // $("#form-submit").val("Submit");
-    // Code for handling the push
-    database.ref().push({
-      business: businessInput,
-      address: addressInput,
-      deal: dealInput,
-      time: timeframeInput,
-      dateAdded: firebase.database.ServerValue.TIMESTAMP,
-      like: likeCounter,
-      dislike: dislikeCounter
-    });
-
-    // clearing the forms after submitting
     $("#business-input").val("")
     $("#address-input").val("")
     $("#deal-input").val("")
     $("#time-start-input").val("")
     $("#time-end-input").val("")
+
+    
+    database.ref().push({
+      business: businessInput,
+      address: addressInput,
+      deal: dealInput,
+      time1: startTimeInput,
+      time2: endTimeInput,
+      like: likeCounter,
+      dislike: dislikeCounter,
+      dateAdded: firebase.database.ServerValue.TIMESTAMP,
+    });
 
   });
 
@@ -74,18 +71,6 @@ $(document).ready(function () {
     }
   });
 
-
-
-
-
-
-
-
-
-
-
-
-
   ///////////////////////////////////
   // like/dislike button functions///
   ///////////////////////////////////
@@ -95,8 +80,7 @@ $(document).ready(function () {
       ///manually done toggle button...///
       if (likeClickVal === 1) {
         updatedCurrentClicks = (currentClicks || 0) - 1;
-      }
-      else {
+      } else {
         updatedCurrentClicks = (currentClicks || 0) + 1;
       }
       return updatedCurrentClicks;
@@ -104,22 +88,21 @@ $(document).ready(function () {
 
     if (likeClickVal == 1) {
       likeClickVal = 0;
-    }
-    else {
+    } else {
       likeClickVal = 1;
     }
     $("#thumbs-up-count-" + key).html(updatedCurrentClicks);
   };
 
   var dislikeClickVal = 0;
+
   function updateDislikes(key) {
     var updatedCurrentClicks;
     database.ref("/" + key + "/dislike").transaction(function (currentClicks) {
       ///manually done toggle button...///
       if (dislikeClickVal === 1) {
         updatedCurrentClicks = (currentClicks || 0) - 1;
-      }
-      else {
+      } else {
         updatedCurrentClicks = (currentClicks || 0) + 1;
       }
       return updatedCurrentClicks;
@@ -127,8 +110,7 @@ $(document).ready(function () {
 
     if (dislikeClickVal == 1) {
       dislikeClickVal = 0;
-    }
-    else {
+    } else {
       dislikeClickVal = 1;
     }
     $("#thumbs-down-count-" + key).html(updatedCurrentClicks);
@@ -166,8 +148,22 @@ $(document).ready(function () {
     addressDisplay.attr("id", "address-display" + key);
     var dealDisplay = $("<div>").addClass("deal-display").text(sv.deal);
     dealDisplay.attr("id", "deal-display" + key);
-    var timeframeDisplay = $("<div>").addClass("timeframe-display").text(sv.time);
-    timeframeDisplay.attr("id", "timeframe-display" + key);
+
+    // store time variable for display
+    var sStart = moment(sv.time1, 'HH:mm').format('hh:mm a');
+    var sEnd = moment(sv.time2, 'HH:mm').format('hh:mm a');
+    var sMinutes = moment(sv.time2, 'HH:mm').diff(moment(), "minutes");
+
+    if (sMinutes <= 0) {
+      sMinutes = "Expired";
+      var timeframeDisplay = $("<div>").addClass("timeframe-display").text(sMinutes);
+    } else {
+
+      var timeframeDisplay = $("<div>").addClass("timeframe-display").text(sStart + sEnd);
+      timeframeDisplay.attr("id", "timeframe-display" + key);
+    }
+
+
     var listingButtons = $("<div>").addClass("listing-buttons");
     listingButtons.attr("id", "listing-buttons" + key);
     //added get-directions + key so that toggle class on "this" will work
@@ -179,10 +175,7 @@ $(document).ready(function () {
     var thumbsDownCount = $("<div>").attr("id", "thumbs-down-count-" + key).addClass("listing-value" + " " + key).text(sv.dislike);
     thumbsUp.attr("data-item", key);
     thumbsDown.attr("data-item", key);
-
     var directionsContainer = $("<div>").attr("id", "directions-container" + key).addClass("hide directions-container");
-
-
     var directions = $("<div>").addClass("directions data-directions").text("");
     directions.attr("id", "directions" + key);
     var closeDirections = $("<div>").attr("id", "close-directions" + key).addClass("far fa-times-circle listing-button close-directions").attr("key-value", key);
@@ -221,6 +214,9 @@ $(document).ready(function () {
     var sKey = $(this).attr("key-value")
     console.log("close has been clicked for key: " + sKey);
     $("#directions-container" + sKey).addClass("hide");
+    $("#business-display" + sKey).animate({
+      scrollTop: $("#elementtoScrollToID").offset().top
+    }, 2000);
   });
 
 });
