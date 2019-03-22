@@ -12,9 +12,6 @@ $(document).ready(function () {
 
   var database = firebase.database();
 
-
-
-
   ////////////////////////////
   // SUBMIT BUTTON FUNCTION //
   ////////////////////////////
@@ -38,14 +35,7 @@ $(document).ready(function () {
     $("#time-start-input").val("")
     $("#time-end-input").val("")
 
-    // if (businessInput === "" ||
-    //   addressInput === "" ||
-    //   dealInput === "" ||
-    //   timeframeInput === "") {
-    //   alert("Complete all fields to continue.");
-    //   return;
-    // } else {
-    // Code for handling the push
+    
     database.ref().push({
       business: businessInput,
       address: addressInput,
@@ -57,12 +47,30 @@ $(document).ready(function () {
       dateAdded: firebase.database.ServerValue.TIMESTAMP,
     });
 
-    // clearing the forms after submitting
-
-    // }
   });
 
   var likeClickVal = 0;
+
+
+  // button hide and show below
+
+  $("#form-submit").disabled = true;
+  $("#form-submit").hide();
+
+  $(".form-control").on("change", function () {
+    event.preventDefault();
+
+    if ($("#business-input").val() != "" &&
+      $("#address-input").val() != "" &&
+      $("#deal-input").val() != "" &&
+      $("#time-start-input").val() != "" &&
+      $("#time-end-input").val() != "") {
+      $("#form-submit").show();
+      $("#form-submit").disabled = false;
+      $("#ins").hide();
+    }
+  });
+
   ///////////////////////////////////
   // like/dislike button functions///
   ///////////////////////////////////
