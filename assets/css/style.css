@@ -80,7 +80,7 @@ body {
     margin-left: 10px;
 }
 
-#form-title {
+.modal-title {
     font-weight: 100;
     font-size: 36px;
     text-align: center;
@@ -94,15 +94,6 @@ body {
     border: none;
     background: #ffffff;
     padding: 10px;
-}
-
-#foursquare {
-    height: 510px;
-    padding: 40px;
-}
-
-#foursquare-data {
-    margin-top: 40px;
 }
 
 .foursquare-name {
@@ -130,6 +121,13 @@ body {
 
 .hide {
     display: none;
+}
+
+button {
+    color: #777777;
+    padding: 0px;
+    border: none;
+    background: #ffffff;
 }
 
 /* 
