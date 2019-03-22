@@ -19,6 +19,8 @@ $(document).ready(function () {
   $("#form-submit").on("click", function () {
     event.preventDefault();
 
+    $('#form-modal').modal('toggle');
+
     // Form inputs
     var businessInput = $("#business-input").val().trim();
     var addressInput = $("#address-input").val().trim();
@@ -45,7 +47,8 @@ $(document).ready(function () {
     $("#business-input").val("")
     $("#address-input").val("")
     $("#deal-input").val("")
-    $("#timeframe-input").val("")
+    $("#time-start-input").val("")
+    $("#time-end-input").val("")
 
   });
 
@@ -63,7 +66,8 @@ $(document).ready(function () {
     if ($("#business-input").val() != "" &&
       $("#address-input").val() != "" &&
       $("#deal-input").val() != "" &&
-      $("#timeframe-input").val() != "") {
+      $("#time-start-input").val() != "" &&
+      $("#time-end-input").val() != "") {
       $("#form-submit").show();
       $("#form-submit").disabled = false;
       $("#ins").hide();
@@ -167,11 +171,11 @@ $(document).ready(function () {
     var listingButtons = $("<div>").addClass("listing-buttons");
     listingButtons.attr("id", "listing-buttons" + key);
     //added get-directions + key so that toggle class on "this" will work
-    var getDirections = $("<div>").attr("id", "get-directions" + key).addClass("fas fa-location-arrow listing-button get-directions");
+    var getDirections = $("<button>").attr("id", "get-directions" + key).addClass("fas fa-location-arrow listing-button get-directions");
     getDirections.attr("data-item", key);
-    var thumbsUp = $("<div>").attr("id", "thumbs-up" + key).addClass("fas fa-thumbs-up listing-button thumbs-up");
+    var thumbsUp = $("<button>").attr("id", "thumbs-up" + key).addClass("fas fa-thumbs-up listing-button thumbs-up");
     var thumbsUpCount = $("<div>").attr("id", "thumbs-up-count-" + key).addClass("listing-value" + " " + key).text(sv.like);
-    var thumbsDown = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-down listing-button thumbs-down" + " " + key);
+    var thumbsDown = $("<button>").attr("data-id", "0").addClass("fas fa-thumbs-down listing-button thumbs-down" + " " + key);
     var thumbsDownCount = $("<div>").attr("id", "thumbs-down-count-" + key).addClass("listing-value" + " " + key).text(sv.dislike);
     thumbsUp.attr("data-item", key);
     thumbsDown.attr("data-item", key);
@@ -200,13 +204,6 @@ $(document).ready(function () {
   })
 
   // Click functions for navigating the document
-  $("#create-post").on("click", function () {
-    $("#create-post").addClass("animated pulse");
-    setTimeout(function () {
-      $("#create-post").removeClass("animated pulse")
-    }, 1000);
-    $("#post-form").toggleClass("hide").addClass("animated fadeInUp");
-  });
 
   $("#foursquare-button").on("click", function () {
     $("#foursquare-button").addClass("animated pulse");

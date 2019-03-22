@@ -12,6 +12,7 @@ $(document).on("click", "#foursquare-button", locationConsent)
 
 
 function locationConsent() {
+    console.log("button clicked")
     navigator.geolocation.getCurrentPosition(success);
 
     function success(pos) {
