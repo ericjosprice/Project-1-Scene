@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>timestamp</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 </head>
 <body>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
 <form>
         <div class="form-group">
@@ -18,29 +20,43 @@
             </div>
 </form>
 
+<input class="timepicker">
 
-<div id="timehere"> </div>
+
+<div id="realtimehere"></div>
+<div id="usertimehere"></div>
 <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
 
+var afterTime = $("#firsttimeframe").val();
+var format = "hh:mm";
+
+var expTime = moment(afterTime, format);
+// alert(afterTime);
+
+// if(currentTime )
+
 $("#form-submit").on("click", function () {
     event.preventDefault();
-    var userTimeInput = $("#firsttimeframe").val();
-    var expTime = $("#timehere").text(userTimeInput);
-    // console.log(userTimeInput);
-
     var currentTime = moment();
-    console.log(moment(currentTime).format("hh:mm"));
+
+    var userTimeInput = $("#firsttimeframe").val();
+    userTimeConverted = moment(userTimeInput, "HH:mm")
+    alert(userTimeConverted);
+
+    // var expTime = $("#timehere").text(userTimeInput);
+    // var momentUserInput = moment(userTimeInput);
+    // console.log(momentUserInput)
+
+    /////bottom is access to real time////
+    // var currentTime = moment().format("hh:mm");
+    // $("#realtimehere").text(currentTime);
+    // var diffTime = moment(currentTime).diff(moment(userTimeInput), "minutes")
+    // console.log(diffTime)
     // console.log(currentTime);
 })
-
-        var timeStr =  $("#firsttimeframe").val();
-        
-        // date.set({
-        //     hour:   timeConverted.get('hour'),
-        //     minute: timeConverted.get('minute'),
-        // });
+    
     
 
 
