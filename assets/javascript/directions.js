@@ -29,15 +29,13 @@ $(document).ready(function () {
         //display hiden directions div
         $(".directions-container" + key).removeClass("hide")
 
-        // .oneClass.secondClass
         // gets the adress of the business directly from the display card
         var BusStreetAddress = $(".address-display" + key).text().trim();
 
         $(".directions-container"+ key).removeClass("hide");
 
-        // console.log("BusStreetAddress " + BusStreetAddress.replace(/\s+/g, '+'));
-        // add the city and state to the BusStreeAddress
 
+        // add the city and state to the BusStreeAddress
         busAddress = BusStreetAddress.replace(/\s#/g, '%23') + "+Austin" + "+TX"
         // busAddress = BusStreetAddress.replace(/\s/g, '%20');
 
@@ -71,7 +69,6 @@ $(document).ready(function () {
 
             var linkToGoogleMaps = "https://www.google.com/maps/dir/?api=1&origin=" + userOrigin + "&destination=" + busAddress + "&mode=walking"
 
-            // var displayHyperlink = "<p><a href=" + linkToGoogleMaps + "target='_blank'" + ">Open in Google</a></p>"
             var displayHyperlink = `<p><a href="${linkToGoogleMaps}" target='_blank'>Open in Google Maps</a></p>`
 
             console.log(linkToGoogleMaps);
