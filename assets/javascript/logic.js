@@ -31,7 +31,7 @@ $(document).ready(function () {
 
 
     $("#form-submit").disabled = true;
-    $("#form-submit").val("Submit");
+    // $("#form-submit").val("Submit");
     // Code for handling the push
     database.ref().push({
       business: businessInput,
