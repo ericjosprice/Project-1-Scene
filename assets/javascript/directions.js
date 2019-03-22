@@ -39,6 +39,7 @@ $(document).ready(function () {
         // add the city and state to the BusStreeAddress
 
         busAddress = BusStreetAddress.replace(/\s#/g, '%23') + "+Austin" + "+TX"
+        // busAddress = BusStreetAddress.replace(/\s/g, '%20');
 
         // generating the queryURL for the AJAX call
         var directionsQueryURL = "https://cors-ut-bootcamp.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=" + userOrigin + "&destination=" + busAddress + "&mode=walking&key=AIzaSyAWVvEMYJEt9Bq0oqqA1FE156FHs86msTg"
@@ -68,8 +69,8 @@ $(document).ready(function () {
                 $(".data-directions" + key).html(walkingJourney);
             }
 
-
             var linkToGoogleMaps = "https://www.google.com/maps/dir/?api=1&origin=" + userOrigin + "&destination=" + busAddress + "&mode=walking"
+
             // var displayHyperlink = "<p><a href=" + linkToGoogleMaps + "target='_blank'" + ">Open in Google</a></p>"
             var displayHyperlink = `<p><a href="${linkToGoogleMaps}" target='_blank'>Open in Google Maps</a></p>`
 
