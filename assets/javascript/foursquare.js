@@ -65,7 +65,7 @@ function locationConsent() {
 
         var creds = "client_id=FEMSVD3N0IBIMAYZZU0DDZK3FUL3RPUI10XOPQ2YA3555ASP&client_secret=K0H2FTFUQJM2LXRZBZVTJFADEK0K0HJZXNAXPWJFI3VK3E5P";
 
-        var sQueryURL = 'https://api.foursquare.com/v2/venues/search?' + creds + '&v=20180323&limit=5&ll=' + lat + ',' + lon + '&query=coffee&intent=browse&radius=1600'
+        var sQueryURL = 'https://api.foursquare.com/v2/venues/search?' + creds + '&v=20180323&limit=5&ll=' + lat + ',' + lon + '&query=happyhour&intent=browse&radius=1600'
 
 
         $.ajax({
