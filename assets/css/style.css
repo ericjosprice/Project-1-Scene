@@ -40,24 +40,24 @@ body {
     box-shadow: 0px 0px 15px #c9c9c9
 }
 
-#business-display {
+.business-display {
     font-size: 42px;
     font-weight: 100;
 }
 
-#address-display {
+.address-display {
     font-size: 21px;
     font-weight: 100;
 }
 
-#deal-display {
+.deal-display {
     margin-top: 30px;
     font-size: 42px;
     font-weight: 700;
     line-height: 100%;
 }
 
-#timeframe-display {
+.timeframe-display {
     margin-top: 30px;
     font-size: 42px;
     font-weight: 100;
