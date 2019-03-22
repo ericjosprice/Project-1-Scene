@@ -178,18 +178,6 @@ $(document).on("click", ".fa-thumbs-down", function() {
 
   // Click functions for navigating the document
 
-  $("#foursquare-button").on("click", function () {
-    $("#foursquare-button").addClass("animated pulse");
-    setTimeout(function () {
-      $("#foursquare-button").removeClass("animated pulse")
-    }, 1000);
-    $("#foursquare").toggleClass("hide").addClass("animated fadeInUp");
-  });
-
-  $("#foursquare-cancel").on("click", function(){
-    $("#foursquare").addClass("hide");
-  });
-
   $(document).on("click", ".close-directions", function () {
     var sKey = $(this).attr("key-value")
     console.log("close has been clicked for key: " + sKey);
