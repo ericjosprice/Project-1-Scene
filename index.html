@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Main Feed</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -12,7 +13,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/animate.css">
     <link href="https://fonts.googleapis.com/css?family=Encode+Sans+Semi+Condensed:100,300,700|Raleway:100,200,300,400|Stalemate|Suranna" rel="stylesheet">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
 </head>
 
 <body>
@@ -24,6 +25,65 @@
             </a>
         </div>
     </nav>
+          
+    <!-- FORM MODAL -->
+    <div class="modal fade" id="form-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title">Make a Scene</div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Buisness Name</label>
+                            <input type="text" class="form-control" id="business-input" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">Address</label>
+                            <input type="text" class="form-control" id="address-input" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">What's the deal?</label>
+                            <textarea class="form-control" id="deal-input" rows="2" maxlength="30" placeholder="Limit 30 characters"></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label for="formGroupExampleInput3">Start Time</label>
+                                <input type="time" class="form-control" id="time-start-input" placeholder="">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="formGroupExampleInput3">End Time</label>
+                                <input type="time" class="form-control" id="time-end-input" placeholder="">
+                            </div>
+                        </div>
+                        
+                        <input id="form-submit" type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOURSQUARE DATA MODAL -->
+    <div class="modal fade" id="foursquare-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title">Nearby Scenes</div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="foursquare-data" class="col-12"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- MAIN FEED -->
     <div id="feed" class="animated zoomIn fadeIn">
@@ -36,10 +96,10 @@
                 <div id="" class="timeframe-display">5pm - 9pm</div>
                 <hr>
                 <div>
-                    <div id="" class="fas fa-location-arrow listing-button get-directions"></div>
-                    <div class="fas fa-thumbs-up listing-button thumbs-up"></div>
+                    <button id="" class="fas fa-location-arrow listing-button get-directions"></button>
+                    <button class="fas fa-thumbs-up listing-button thumbs-up"></button>
                     <div id="" class= "listing-value thumbs-up-0"></div>
-                    <div class="fas fa-thumbs-down listing-button thumbs-down"></div>
+                    <button class="fas fa-thumbs-down listing-button thumbs-down"></button>
                     <div id="" class= "listing-value thumbs-down-0"></div>
                 </div>
             </div>
@@ -54,56 +114,16 @@
 
     <!-- FOOTER -->
     <footer id="footer">
-        <div id="post-form" class="container hide">
-            <div class="row">
-                <div class="col-12">
-                    <div id="form-title">Make a Scene</div>
-                </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-12">
-                    <form>
-                        <div class="form-group">
-                            <label for="formGroupExampleInput">Buisness Name</label>
-                            <input type="text" class="form-control" id="business-input" placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label for="formGroupExampleInput2">Address</label>
-                            <input type="text" class="form-control" id="address-input" placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">What's the deal?</label>
-                            <textarea class="form-control" id="deal-input" rows="2" maxlength="20" placeholder="Limit 20 characters"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="formGroupExampleInput3">Timeframe</label>
-                            <input type="text" class="form-control" id="timeframe-input" placeholder="">
-                        </div>
-                        <input id="form-submit" type="submit" value="Submit">
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div id="foursquare" class="container hide">
-            <div class="row">
-                <div id="foursquare-cancel" class="col-12 far fa-times-circle listing-button"></div>
-            </div>
-            <div class="row">
-                <div id="foursquare-data" class="col-12">
-                </div>
-            </div>
-        </div>
         <div id="bottom-buttons" class="container">
-            <div id="create-post" class="fas fa-plus-square bottom-button"></div>
-            <div id="foursquare-button" class="fab fa-foursquare bottom-button"></div>
+            <button type="button" class="fas fa-plus-square bottom-button" data-toggle="modal" data-target="#form-modal"></button>
+            <button id="foursquare-button" type="button" class="far fa-compass bottom-button" data-toggle="modal" data-target="#foursquare-modal"></button>
         </div>
     </footer>
+    
     <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase.js"></script>
     <script src="assets/javascript/directions.js" type="text/javascript"></script>
     <script src="assets/javascript/logic.js" type="text/javascript"></script>
     <script src="assets/javascript/foursquare.js" type="text/javascript"></script>
 
- 
 </body>
 </html>
