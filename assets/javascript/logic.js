@@ -53,7 +53,8 @@ $(document).ready(function () {
       $("#business-input").val("")
       $("#address-input").val("")
       $("#deal-input").val("")
-      $("#timeframe-input").val("")
+      $("#time-start-input").val("")
+      $("#time-end-input").val("")
     }
   });
 
