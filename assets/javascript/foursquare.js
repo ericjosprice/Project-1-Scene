@@ -79,7 +79,6 @@ function getFourSquareData() {
             var newP = $("<p>");
             newDiv.attr("id", i);
             newDiv.text(response.response.venues[i].name)
-            newP.text(response.response.venues[i].location.address);
 
             // =======
             var FourSqBusAddress = response.response.venues[i].location.address;
@@ -89,7 +88,7 @@ function getFourSquareData() {
             } else {
                 var linkToGMaps = "https://www.google.com/maps/dir/?api=1&origin=" + lat + ',' + lon + "&destination=" + FourSqBusAddress + "&mode=walking"
 
-                var displayHyplink = `<p><a href="${linkToGMaps}" target='_blank'>Open in Google Maps</a></p>`
+                var displayHyplink = `<p><a href="${linkToGMaps}" target='_blank'>${FourSqBusAddress}</a></p>`
 
                 console.log(linkToGMaps);
                 newP.append(displayHyplink);
