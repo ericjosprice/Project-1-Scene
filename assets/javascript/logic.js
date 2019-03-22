@@ -26,7 +26,7 @@ $(document).ready(function () {
     var businessInput = $("#business-input").val().trim();
     var addressInput = $("#address-input").val().trim();
     var dealInput = $("#deal-input").val().trim();
-    var timeframeInput = $("#timeframe-input").val().trim();
+    // var timeframeInput = $("#timeframe-input").val().trim();
     var likeCounter = 0;
     var dislikeCounter = 0;
 
@@ -55,6 +55,24 @@ $(document).ready(function () {
       $("#timeframe-input").val("")
     }
   });
+
+
+/////////////////////////
+// EXPIRATION FUNCTION //
+/////////////////////////
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+
+    timeConverted = moment(timeStr, 'HH:mm');
+
+date.set({
+    hour:   time.get('hour'),
+    minute: time.get('minute'),
+});
+
+console.log(date);
+
+
+
 
   var likeClickVal = 0;
   ///////////////////////////////////
@@ -142,7 +160,7 @@ $(document).on("click", ".fa-thumbs-down", function() {
       var listingButtons = $("<div>").attr("id", "listing-buttons");
       listingButtons.addClass(key);
       //added get-directions + key so that toggle class on "this" will work
-      var getDirections = $("<div>").attr("id", "get-directions").addClass("fas fa-location-arrow listing-button" + "get-directions" + key);
+      var getDirections = $("<div>").attr("id", "get-directions").addClass("fas fa-location-arrow listing-button get-directions" + key);
       getDirections.attr("data-item", key);
       var thumbsUp = $("<div>").attr("data-id", "0").addClass("fas fa-thumbs-up listing-button thumbs-up" + " " + key);
       var thumbsUpCount = $("<div>").attr("id", "thumbs-up-count-" + key).addClass("listing-value" + " " + key).text(sv.like);
@@ -153,7 +171,8 @@ $(document).on("click", ".fa-thumbs-down", function() {
 
       var directionsContainer = $("<div>").attr("id", "directions-container").addClass("hide directions-container"+ key);
 
-      var directions = $("<div>").attr("id", "directions").text("THESE ARE DIRECTIONS");
+
+      var directions = $("<div>").attr("id", "directions").text("");
       directions.addClass("data-directions" + key)
       var closeDirections = $("<div>").attr("id", "close-directions").addClass("far fa-times-circle listing-button").attr("key-value", key);
 
@@ -206,6 +225,10 @@ $(document).on("click", ".fa-thumbs-down", function() {
       $("#foursquare-button").removeClass("animated pulse")
     }, 1000);
     $("#foursquare").toggleClass("hide").addClass("animated fadeInUp");
+  });
+
+  $("#foursquare-cancel").on("click", function(){
+    $("#foursquare").addClass("hide");
   });
 
 

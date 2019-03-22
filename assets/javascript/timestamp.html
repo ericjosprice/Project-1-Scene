@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>timestamp</title>
+</head>
+<body>
+
+<form>
+        <div class="form-group">
+                <label for="formGroupExampleInput3">Timeframe</label>
+                <input type="time" class="form-control" id="firsttimeframe" placeholder="">
+                <!-- <input type="time" class="form-control" id="secondtimeframe" placeholder=""> -->
+                <input id="form-submit" type="submit" value="Submit">
+
+            </div>
+</form>
+
+
+<div id="timehere"> </div>
+<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+$("#form-submit").on("click", function () {
+    event.preventDefault();
+    var userTimeInput = $("#firsttimeframe").val();
+    var expTime = $("#timehere").text(userTimeInput);
+    // console.log(userTimeInput);
+
+    var currentTime = moment();
+    console.log(moment(currentTime).format("hh:mm"));
+    // console.log(currentTime);
+})
+
+        var timeStr =  $("#firsttimeframe").val();
+        
+        // date.set({
+        //     hour:   timeConverted.get('hour'),
+        //     minute: timeConverted.get('minute'),
+        // });
+    
+
+
+    </script> 
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+
+</body>
+</html>
