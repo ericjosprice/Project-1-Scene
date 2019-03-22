@@ -79,7 +79,6 @@ function getFourSquareData() {
             var newP = $("<p>");
             newDiv.attr("id", i);
             newDiv.text(response.response.venues[i].name)
-        
             // =======
             
             var FourSqBusAddress = response.response.venues[i].location.address;

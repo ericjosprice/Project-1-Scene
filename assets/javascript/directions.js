@@ -27,12 +27,12 @@ $(document).ready(function () {
     function clickedForDirections(key) {
         console.log("clickedForDirections", key);
         //display hiden directions div
-        $(".directions-container" + key).removeClass("hide")
+        $("#directions-container" + key).removeClass("hide")
 
         // gets the adress of the business directly from the display card
-        var BusStreetAddress = $(".address-display" + key).text().trim();
+        var BusStreetAddress = $("#address-display" + key).text().trim();
 
-        $(".directions-container"+ key).removeClass("hide");
+        $("#directions-container"+ key).removeClass("hide");
 
 
         // add the city and state to the BusStreeAddress
@@ -64,7 +64,7 @@ $(document).ready(function () {
                 walkingJourney.append(directionsToBusiness);
 
                 // calls the HTML id to display the directions on the DOM                
-                $(".data-directions" + key).html(walkingJourney);
+                $("#directions" + key).html(walkingJourney);
             }
 
             var linkToGoogleMaps = "https://www.google.com/maps/dir/?api=1&origin=" + userOrigin + "&destination=" + busAddress + "&mode=walking"
