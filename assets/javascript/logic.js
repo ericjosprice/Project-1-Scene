@@ -35,6 +35,7 @@ $(document).ready(function () {
       dealInput === "" ||
       timeframeInput === "") {
       alert("Complete all fields to continue.");
+      
       return;
     } else {
       // Code for handling the push
