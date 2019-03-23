@@ -8,11 +8,30 @@ body {
     padding-bottom: 50px;
 }
 
+#splash-screen {
+    text-align: center;
+    background: #ebebeb;
+    margin-top: 150px;
+}
+
 #navbar {
-    background: #ffffff;
+    background-image: url(../images/photos/daniel-horvath-207223-unsplash.jpg);
+    background-size: cover;
+    background-color: #ffffff;
     border-bottom: solid 1px #777777;
     padding: 0px;
     height: 150px;
+    transition: .5s;
+    animation-delay: 3s;
+}
+
+#nav-color {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #111;
+    opacity: 0;
+    transition: .5s;
 }
 
 #brand {
@@ -20,14 +39,17 @@ body {
     margin: auto;
     font-weight: bold;
     color: #ffffff;
-    font-size: 62px;
-    color: #777777;
+    text-shadow: 1px 1px 1px #444;
+    font-size: 80px;
     margin-top: 15px;
+    transition: .5s;
+    animation-delay: 3s;
 }
 
 #feed {
     padding: 20px;
     overflow: auto;
+    animation-delay: 3.5s;
 }
 
 .jumbotron {
@@ -40,14 +62,40 @@ body {
     box-shadow: 0px 0px 15px #c9c9c9
 }
 
+.pattern-1 {
+    background-image: url(../images/backgrounds/back_pattern.png);
+}
+
+.pattern-2 {
+    background-image: url(../images/backgrounds/cream_pixels.png);
+}
+
+.pattern-3 {
+    background-image: url(../images/backgrounds/pw_maze_white.png);
+}
+
+.pattern-4 {
+    background-image: url(../images/backgrounds/small-crackle-bright.png);
+}
+
+.pattern-5 {
+    background-image: url(../images/backgrounds/stacked_circles.png);
+}
+
+.pattern-6 {
+    background-image: url(../images/backgrounds/subtle_dots.png);
+}
+
 .business-display {
     font-size: 42px;
     font-weight: 100;
+    line-height: 100%;
 }
 
 .address-display {
     font-size: 21px;
     font-weight: 100;
+    line-height: 100%;
 }
 
 .deal-display {
@@ -61,10 +109,11 @@ body {
     margin-top: 30px;
     font-size: 42px;
     font-weight: 100;
+    line-height: 100%;
 }
 
 .listing-button {
-    color: #777777;
+    color: #777;
     font-size: 24px;
     margin-left: 10px;
 }
@@ -74,7 +123,7 @@ body {
 }
 
 .listing-value {
-    color: #777777;
+    color: #777;
     display: inline;
     font-size: 16px;
     margin-left: 10px;
@@ -95,7 +144,7 @@ body {
 #form-submit {
     display: block;
     margin: auto;
-    color: #777777;
+    color: #777;
     border: none;
     background: #ffffff;
     padding: 10px;
@@ -108,6 +157,7 @@ body {
 #bottom-buttons {
     font-size: 48px;
     text-align: center;
+    animation-delay: 3s;
 }
 
 .bottom-button {
@@ -117,11 +167,12 @@ body {
 #footer {
     font-size: 16px;
     background: #ffffff;
-    color: #777777;
+    color: #777;
     position: fixed;
     bottom: 0;
-    border-top: solid 1px #777777;
+    border-top: solid 1px #777;
     width: 100%;
+    animation-delay: 3s;
 }
 
 .hide {
@@ -129,10 +180,19 @@ body {
 }
 
 button {
-    color: #777777;
+    color: #777;
     padding: 0px;
     border: none;
-    background: #ffffff;
+    background: rgba(0, 0, 0, 0);
+    transition: all 0.3s ease 0s;
+}
+
+button:hover {
+    color: #444;
+}
+
+button:focus {
+    outline: none;
 }
 
 /* 

@@ -19,13 +19,19 @@
 </head>
 
 <body>
+    <!-- SPLASH SCREEN -->
+    <div id="splash-screen">
+        <img src="" alt="splash animation">
+    </div>
+
     <!-- TOP NAV -->
     <nav id="navbar" class="animated fadeInDown navbar fixed-top navbar-light bg-light">
-        <div class="container">
-            <a id="brand" class="animated fadeInDown navbar-brand" href="index.html">
-                Scene
-            </a>
-        </div>
+        <div id="nav-color"></div>
+            <div class="container">
+                <a id="brand" class="animated fadeInDown navbar-brand" href="index.html">
+                    Scene
+                </a>
+            </div>
     </nav>
           
     <!-- FORM MODAL -->
@@ -75,7 +81,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <div class="modal-title">Nearby Scenes</div>
+                    <div class="modal-title">Scenes Near You</div>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -88,7 +94,7 @@
     </div>
 
     <!-- MAIN FEED -->
-    <div id="feed" class="animated zoomIn fadeIn">
+    <div id="feed" class="animated fadeIn">
 
         <!-- <div class="jumbotron">
             <div id="post">
@@ -115,8 +121,8 @@
     </div>
 
     <!-- FOOTER -->
-    <footer id="footer">
-        <div id="bottom-buttons" class="container">
+    <footer id="footer" class="animated fadeInUp">
+        <div id="bottom-buttons" class="container animated fadeInUp">
             <button type="button" class="fas fa-plus-square bottom-button" data-toggle="modal" data-target="#form-modal"></button>
             <button id="foursquare-button" type="button" class="far fa-compass bottom-button" data-toggle="modal" data-target="#foursquare-modal"></button>
         </div>
