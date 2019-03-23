@@ -87,6 +87,11 @@ body {
     margin-top: 20px;
 }
 
+#ins {
+    text-align: center;
+    font-size: 10px;
+}
+
 #form-submit {
     display: block;
     margin: auto;

@@ -12,12 +12,12 @@ $(document).ready(function () {
 
   var database = firebase.database();
 
-
-
-
   ////////////////////////////
   // SUBMIT BUTTON FUNCTION //
   ////////////////////////////
+  $("#form-submit").disabled = true;
+  $("#form-submit").hide();
+
   $("#form-submit").on("click", function () {
     event.preventDefault();
 
@@ -32,37 +32,59 @@ $(document).ready(function () {
     var endTimeInput = $("#time-end-input").val();
     var likeCounter = 0;
     var dislikeCounter = 0;
-    $("#business-input").val("")
-    $("#address-input").val("")
-    $("#deal-input").val("")
-    $("#time-start-input").val("")
-    $("#time-end-input").val("")
 
-    // if (businessInput === "" ||
-    //   addressInput === "" ||
-    //   dealInput === "" ||
-    //   timeframeInput === "") {
-    //   alert("Complete all fields to continue.");
-    //   return;
-    // } else {
-    // Code for handling the push
-    database.ref().push({
-      business: businessInput,
-      address: addressInput,
-      deal: dealInput,
-      time1: startTimeInput,
-      time2: endTimeInput,
-      like: likeCounter,
-      dislike: dislikeCounter,
-      dateAdded: firebase.database.ServerValue.TIMESTAMP,
-    });
 
-    // clearing the forms after submitting
+    if (businessInput === "" ||
+      addressInput === "" ||
+      dealInput === "" ||
+      startTimeInput === "" ||
+      endTimeInput === "") {
+      $("#ins").show();
+      $("#form-submit").hide();
+      // $("#form-submit").disabled = true;
+      return;
+    } else {
+      // Code for handling the push
+      database.ref().push({
+        business: businessInput,
+        address: addressInput,
+        deal: dealInput,
+        time1: startTimeInput,
+        time2: endTimeInput,
+        like: likeCounter,
+        dislike: dislikeCounter,
+        dateAdded: firebase.database.ServerValue.TIMESTAMP,
+      });
 
-    // }
+      // clearing the forms after submitting
+      $("#business-input").val("")
+      $("#address-input").val("")
+      $("#deal-input").val("")
+      $("#time-start-input").val("")
+      $("#time-end-input").val("")
+
+    }
+
   });
 
+
   var likeClickVal = 0;
+
+  // submit button hide and show
+  $(".form-control").on("change", function () {
+    event.preventDefault();
+
+    if ($("#business-input").val() != "" &&
+      $("#address-input").val() != "" &&
+      $("#deal-input").val() != "" &&
+      $("#time-start-input").val() != "" &&
+      $("#time-end-input").val() != "") {
+      $("#form-submit").show();
+      $("#form-submit").disabled = false;
+      $("#ins").hide();
+    }
+  });
+
   ///////////////////////////////////
   // like/dislike button functions///
   ///////////////////////////////////
@@ -170,7 +192,7 @@ $(document).ready(function () {
     var directionsContainer = $("<div>").attr("id", "directions-container" + key).addClass("hide directions-container");
     var directions = $("<div>").addClass("directions data-directions").text("");
     directions.attr("id", "directions" + key);
-    var closeDirections = $("<div>").attr("id", "close-directions" + key).addClass("far fa-times-circle listing-button close-directions").attr("key-value", key);
+    var closeDirections = $("<button>").attr("id", "close-directions" + key).addClass("far fa-times-circle listing-button close-directions").attr("key-value", key);
 
     // creating the post
     $("#feed").prepend(jumbotron);
@@ -206,9 +228,12 @@ $(document).ready(function () {
     var sKey = $(this).attr("key-value")
     console.log("close has been clicked for key: " + sKey);
     $("#directions-container" + sKey).addClass("hide");
-    $("#business-display" + sKey).animate({
-      scrollTop: $("#elementtoScrollToID").offset().top
-    }, 2000);
+    //jump to card after closing out walking directions
+    $('html, body').animate({
+      scrollTop: ($("#jumbotron" + sKey).offset().top)
+    }, 800);
+
+
   });
 
 });
