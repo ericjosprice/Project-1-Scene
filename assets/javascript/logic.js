@@ -206,9 +206,12 @@ $(document).ready(function () {
     var sKey = $(this).attr("key-value")
     console.log("close has been clicked for key: " + sKey);
     $("#directions-container" + sKey).addClass("hide");
-    $("#business-display" + sKey).animate({
-      scrollTop: $("#elementtoScrollToID").offset().top
-    }, 2000);
+  //jump to card after closing out walking directions
+    $('html, body').animate({
+      scrollTop: ($("#jumbotron" + sKey).offset().top)
+  },800);
+
+
   });
 
 });
