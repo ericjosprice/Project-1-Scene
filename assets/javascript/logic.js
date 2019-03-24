@@ -152,7 +152,11 @@ $(document).ready(function () {
     console.log(key);
     // HTML elements created with jQuery 
     //all cards and their elements have been given a unique ID
-    var jumbotron = $("<div>").addClass("jumbotron");
+
+    // generating a random number to assign a background pattern
+    // var randomNumber = Math.floor(Math.random() * 6) + 1;
+
+    var jumbotron = $("<div>").addClass("jumbotron pattern-2");
     jumbotron.attr("id", "jumbotron" + key);
     var post = $("<div>").addClass("post");
     post.attr("id", "post" + key);
@@ -164,8 +168,8 @@ $(document).ready(function () {
     dealDisplay.attr("id", "deal-display" + key);
 
     // store time variable for display
-    var sStart = moment(sv.time1, 'HH:mm').format('hh:mm a');
-    var sEnd = moment(sv.time2, 'HH:mm').format('hh:mm a');
+    var sStart = moment(sv.time1, 'HH:mm').format('h:mm a');
+    var sEnd = moment(sv.time2, 'HH:mm').format('h:mm a');
     var sMinutes = moment(sv.time2, 'HH:mm').diff(moment(), "minutes");
 
     if (sMinutes <= 0) {
@@ -173,10 +177,9 @@ $(document).ready(function () {
       var timeframeDisplay = $("<div>").addClass("timeframe-display").text(sMinutes);
     } else {
 
-      var timeframeDisplay = $("<div>").addClass("timeframe-display").text(sStart + sEnd);
+      var timeframeDisplay = $("<div>").addClass("timeframe-display").text(sStart + " - " + sEnd);
       timeframeDisplay.attr("id", "timeframe-display" + key);
     }
-
 
     var listingButtons = $("<div>").addClass("listing-buttons");
     listingButtons.attr("id", "listing-buttons" + key);
@@ -212,18 +215,6 @@ $(document).ready(function () {
 
   // Click functions for navigating the document
 
-  $("#foursquare-button").on("click", function () {
-    $("#foursquare-button").addClass("animated pulse");
-    setTimeout(function () {
-      $("#foursquare-button").removeClass("animated pulse")
-    }, 1000);
-    $("#foursquare").toggleClass("hide").addClass("animated fadeInUp");
-  });
-
-  $("#foursquare-cancel").on("click", function () {
-    $("#foursquare").addClass("hide");
-  });
-
   $(document).on("click", ".close-directions", function () {
     var sKey = $(this).attr("key-value")
     console.log("close has been clicked for key: " + sKey);
@@ -232,8 +223,29 @@ $(document).ready(function () {
     $('html, body').animate({
       scrollTop: ($("#jumbotron" + sKey).offset().top)
     }, 800);
-
-
   });
+
+  function splash(){
+    $("#splash-screen").addClass("hide")
+  }
+
+  setTimeout(splash, 2500);
+
+  // animated top bar shrink on scroll
+
+  window.onscroll = function() {scrollFunction()};
+
+  function scrollFunction() {
+    if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+      document.getElementById("navbar").style.height = "70px";
+      document.getElementById("nav-color").style.opacity = "0.95";
+      document.getElementById("brand").style.fontSize = "35px";
+      
+    } else {
+      document.getElementById("navbar").style.height = "150px";
+      document.getElementById("nav-color").style.opacity = "0";
+      document.getElementById("brand").style.fontSize = "80px";
+    }
+  }
 
 });
