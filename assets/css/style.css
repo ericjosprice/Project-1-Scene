@@ -9,12 +9,13 @@ body {
 }
 
 #splash-screen {
-    text-align: center;
     background: #ffffff;
 }
 
 #splash-screen img {
-    width: 70%;
+    display: block;
+    margin: auto;
+    width: 60%;
 }
 
 #navbar {
@@ -96,6 +97,7 @@ body {
 }
 
 .address-display {
+    margin-top: 10px;
     font-size: 21px;
     font-weight: 100;
     line-height: 100%;
