@@ -11,7 +11,10 @@ body {
 #splash-screen {
     text-align: center;
     background: #ffffff;
-    margin-top: 150px;
+}
+
+#splash-screen img {
+    width: 70%;
 }
 
 #navbar {
@@ -22,7 +25,7 @@ body {
     padding: 0px;
     height: 150px;
     transition: .5s;
-    animation-delay: 3s;
+    animation-delay: 2.6s;
 }
 
 #nav-color {
@@ -43,13 +46,13 @@ body {
     font-size: 80px;
     margin-top: 15px;
     transition: .5s;
-    animation-delay: 3s;
+    animation-delay: 2.6s;
 }
 
 #feed {
     padding: 20px;
     overflow: auto;
-    animation-delay: 3.5s;
+    animation-delay: 3s;
 }
 
 .jumbotron {
@@ -170,7 +173,7 @@ body {
     bottom: 0;
     border-top: solid 1px #777;
     width: 100%;
-    animation-delay: 3s;
+    animation-delay: 2.6s;
 }
 
 .hide {

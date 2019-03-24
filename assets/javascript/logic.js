@@ -229,7 +229,7 @@ $(document).ready(function () {
     $("#splash-screen").addClass("hide")
   }
 
-  setTimeout(splash, 2900);
+  setTimeout(splash, 2500);
 
   // animated top bar shrink on scroll
 
