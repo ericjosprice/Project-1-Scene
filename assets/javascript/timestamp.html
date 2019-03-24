@@ -30,7 +30,14 @@
 <script type="text/javascript">
 
 var afterTime = $("#firsttimeframe").val();
+<<<<<<< HEAD
 var format = "hh:mm";
+=======
+var format = 'LT';
+
+
+
+>>>>>>> master
 
 var expTime = moment(afterTime, format);
 // alert(afterTime);
@@ -42,9 +49,15 @@ $("#form-submit").on("click", function () {
     var currentTime = moment();
 
     var userTimeInput = $("#firsttimeframe").val();
+<<<<<<< HEAD
     userTimeConverted = moment(userTimeInput, "HH:mm")
     alert(userTimeConverted);
 
+=======
+    userTimeConverted = moment(userTimeInput, "LT")
+      alert(userTimeConverted);
+        console.log(userTimeConverted);
+>>>>>>> master
     // var expTime = $("#timehere").text(userTimeInput);
     // var momentUserInput = moment(userTimeInput);
     // console.log(momentUserInput)

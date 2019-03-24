@@ -12,6 +12,7 @@ $(document).on("click", "#foursquare-button", locationConsent)
 
 
 function locationConsent() {
+    console.log("button clicked")
     navigator.geolocation.getCurrentPosition(success);
 
     function success(pos) {
@@ -65,9 +66,15 @@ function getFourSquareData() {
 
     var creds = "client_id=FEMSVD3N0IBIMAYZZU0DDZK3FUL3RPUI10XOPQ2YA3555ASP&client_secret=K0H2FTFUQJM2LXRZBZVTJFADEK0K0HJZXNAXPWJFI3VK3E5P";
 
-    var sQueryURL = 'https://api.foursquare.com/v2/venues/search?' + creds + '&v=20180323&limit=5&ll=' + lat + ',' + lon + '&query=coffee&intent=browse&radius=1600'
+    var sQueryURL = 'https://api.foursquare.com/v2/venues/search?v=20180323&limit=5&ll=' + lat + ',' + lon + '&radius=900&categoryId=4d4b7105d754a06376d81259&'+ creds;
+
+    // // nightlifespot seach: 4d4b7105d754a06376d81259
+    // var testing ='https://api.foursquare.com/v2/venues/categories/search?' + creds + '&v=20180323&limit=5&ll=' + lat + ',' + lon + 'radius=1600'
+
+    // var snightlifeQueryURL = 'https://api.foursquare.com/v2/venues/categories/4d4b7105d754a06376d81259/' + creds + '&v=20180323&limit=5&ll=' + lat + ',' + lon + 'radius=1600' 
 
 
+    // https://api.foursquare.com/v2/venues/search?ll="+ ll+"&radius=10000&limit=50&categoryId="+catID+"&client_secret=xxx&client_id=xxx
     $.ajax({
         url: sQueryURL,
         method: "GET"
@@ -79,8 +86,8 @@ function getFourSquareData() {
             var newP = $("<p>");
             newDiv.attr("id", i);
             newDiv.text(response.response.venues[i].name)
-
             // =======
+            
             var FourSqBusAddress = response.response.venues[i].location.address;
 
             if (FourSqBusAddress == undefined) {
@@ -93,8 +100,6 @@ function getFourSquareData() {
                 console.log(linkToGMaps);
                 newP.append(displayHyplink);
             }
-
-
 
             // =======
 
