@@ -1,5 +1,5 @@
 body {
-    background: #ebebeb;
+    background: #ffffff;
     font-family: 'Encode Sans Semi Condensed', sans-serif;
     margin: 0px;
     padding: 0px;
@@ -10,12 +10,12 @@ body {
 
 #splash-screen {
     text-align: center;
-    background: #ebebeb;
+    background: #ffffff;
     margin-top: 150px;
 }
 
 #navbar {
-    background-image: url(../images/photos/daniel-horvath-207223-unsplash.jpg);
+    background-image: url(../images/photos/top_bar-bkg.jpg);
     background-size: cover;
     background-color: #ffffff;
     border-bottom: solid 1px #777777;
@@ -103,6 +103,7 @@ body {
     font-size: 42px;
     font-weight: 700;
     line-height: 100%;
+    color: #d1583c
 }
 
 .timeframe-display {
@@ -113,7 +114,6 @@ body {
 }
 
 .listing-button {
-    color: #777;
     font-size: 24px;
     margin-left: 10px;
 }
@@ -123,15 +123,15 @@ body {
 }
 
 .listing-value {
-    color: #777;
+    color: #111;
     display: inline;
     font-size: 16px;
     margin-left: 10px;
 }
 
 .modal-title {
-    font-weight: 100;
-    font-size: 36px;
+    font-weight: 200;
+    font-size: 40px;
     text-align: center;
     margin-top: 20px;
 }
@@ -144,7 +144,6 @@ body {
 #form-submit {
     display: block;
     margin: auto;
-    color: #777;
     border: none;
     background: #ffffff;
     padding: 10px;
@@ -167,7 +166,6 @@ body {
 #footer {
     font-size: 16px;
     background: #ffffff;
-    color: #777;
     position: fixed;
     bottom: 0;
     border-top: solid 1px #777;
@@ -180,7 +178,7 @@ body {
 }
 
 button {
-    color: #777;
+    color: #111;
     padding: 0px;
     border: none;
     background: rgba(0, 0, 0, 0);

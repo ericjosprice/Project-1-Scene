@@ -154,9 +154,9 @@ $(document).ready(function () {
     //all cards and their elements have been given a unique ID
 
     // generating a random number to assign a background pattern
-    var randomNumber = Math.floor(Math.random() * 6) + 1;
+    // var randomNumber = Math.floor(Math.random() * 6) + 1;
 
-    var jumbotron = $("<div>").addClass("jumbotron pattern-" + randomNumber);
+    var jumbotron = $("<div>").addClass("jumbotron pattern-2");
     jumbotron.attr("id", "jumbotron" + key);
     var post = $("<div>").addClass("post");
     post.attr("id", "post" + key);
@@ -238,7 +238,7 @@ $(document).ready(function () {
   function scrollFunction() {
     if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
       document.getElementById("navbar").style.height = "70px";
-      document.getElementById("nav-color").style.opacity = "0.9";
+      document.getElementById("nav-color").style.opacity = "0.95";
       document.getElementById("brand").style.fontSize = "35px";
       
     } else {
