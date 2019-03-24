@@ -37,8 +37,7 @@ $(document).ready(function () {
 
         // add the city and state to the BusStreeAddress
         busAddress = BusStreetAddress.replace(/\s#/g, '%23') + "+Austin" + "+TX"
-        // busAddress = BusStreetAddress.replace(/\s/g, '%20');
-
+        
         // generating the queryURL for the AJAX call
         var directionsQueryURL = "https://cors-ut-bootcamp.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=" + userOrigin + "&destination=" + busAddress + "&mode=walking&key=AIzaSyAWVvEMYJEt9Bq0oqqA1FE156FHs86msTg"
 
