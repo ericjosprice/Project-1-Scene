@@ -12,12 +12,21 @@ $(document).ready(function () {
 
   var database = firebase.database();
 
+<<<<<<< HEAD
 
 
   
 ////////////////////////////
 // SUBMIT BUTTON FUNCTION //
 ////////////////////////////
+=======
+  ////////////////////////////
+  // SUBMIT BUTTON FUNCTION //
+  ////////////////////////////
+  $("#form-submit").disabled = true;
+  $("#form-submit").hide();
+
+>>>>>>> ebf7004ad82495ac93e25bb2a2e6593912ff3bb7
   $("#form-submit").on("click", function () {
     event.preventDefault();
  
@@ -31,11 +40,23 @@ $(document).ready(function () {
     var likeCounter = 0;
     var dislikeCounter = 0;
 
+<<<<<<< HEAD
     if (businessInput === "" ||
       addressInput === "" ||
       dealInput === "" ||
       timeframeInput === "") {
       alert("Complete all fields to continue.");
+=======
+
+    if (businessInput === "" ||
+      addressInput === "" ||
+      dealInput === "" ||
+      startTimeInput === "" ||
+      endTimeInput === "") {
+      $("#ins").show();
+      $("#form-submit").hide();
+      // $("#form-submit").disabled = true;
+>>>>>>> ebf7004ad82495ac93e25bb2a2e6593912ff3bb7
       return;
     } else {
       // Code for handling the push
@@ -43,10 +64,18 @@ $(document).ready(function () {
         business: businessInput,
         address: addressInput,
         deal: dealInput,
+<<<<<<< HEAD
         time: timeframeInput,
         dateAdded: firebase.database.ServerValue.TIMESTAMP,
         like : likeCounter,
         dislike : dislikeCounter
+=======
+        time1: startTimeInput,
+        time2: endTimeInput,
+        like: likeCounter,
+        dislike: dislikeCounter,
+        dateAdded: firebase.database.ServerValue.TIMESTAMP,
+>>>>>>> ebf7004ad82495ac93e25bb2a2e6593912ff3bb7
       });
 
       // clearing the forms after submitting
@@ -55,10 +84,33 @@ $(document).ready(function () {
       $("#deal-input").val("")
       $("#time-start-input").val("")
       $("#time-end-input").val("")
+<<<<<<< HEAD
+    }
+=======
+
+    }
+
+>>>>>>> ebf7004ad82495ac93e25bb2a2e6593912ff3bb7
+  });
+
+
+  var likeClickVal = 0;
+
+  // submit button hide and show
+  $(".form-control").on("change", function () {
+    event.preventDefault();
+
+    if ($("#business-input").val() != "" &&
+      $("#address-input").val() != "" &&
+      $("#deal-input").val() != "" &&
+      $("#time-start-input").val() != "" &&
+      $("#time-end-input").val() != "") {
+      $("#form-submit").show();
+      $("#form-submit").disabled = false;
+      $("#ins").hide();
     }
   });
 
-  var likeClickVal = 0;
   ///////////////////////////////////
   // like/dislike button functions///
   ///////////////////////////////////
@@ -147,6 +199,7 @@ connectedRef.on("value", function(snap) {
       dealDisplay.attr("id", "deal-display" + key);
       var timeframeDisplay = $("<div>").addClass("timeframe-display").text(sv.time);
       timeframeDisplay.attr("id", "timeframe-display" + key);
+<<<<<<< HEAD
       var listingButtons = $("<div>").addClass("listing-buttons");
       listingButtons.attr("id", "listing-buttons" + key);
       //added get-directions + key so that toggle class on "this" will work
@@ -181,6 +234,42 @@ connectedRef.on("value", function(snap) {
       console.log("The read failed: " + errorObject.code);
 
     })
+=======
+    }
+
+
+    var listingButtons = $("<div>").addClass("listing-buttons");
+    listingButtons.attr("id", "listing-buttons" + key);
+    //added get-directions + key so that toggle class on "this" will work
+    var getDirections = $("<button>").attr("id", "get-directions" + key).addClass("fas fa-location-arrow listing-button get-directions");
+    getDirections.attr("data-item", key);
+    var thumbsUp = $("<button>").attr("id", "thumbs-up" + key).addClass("fas fa-thumbs-up listing-button thumbs-up");
+    var thumbsUpCount = $("<div>").attr("id", "thumbs-up-count-" + key).addClass("listing-value" + " " + key).text(sv.like);
+    var thumbsDown = $("<button>").attr("data-id", "0").addClass("fas fa-thumbs-down listing-button thumbs-down" + " " + key);
+    var thumbsDownCount = $("<div>").attr("id", "thumbs-down-count-" + key).addClass("listing-value" + " " + key).text(sv.dislike);
+    thumbsUp.attr("data-item", key);
+    thumbsDown.attr("data-item", key);
+    var directionsContainer = $("<div>").attr("id", "directions-container" + key).addClass("hide directions-container");
+    var directions = $("<div>").addClass("directions data-directions").text("");
+    directions.attr("id", "directions" + key);
+    var closeDirections = $("<button>").attr("id", "close-directions" + key).addClass("far fa-times-circle listing-button close-directions").attr("key-value", key);
+
+    // creating the post
+    $("#feed").prepend(jumbotron);
+    jumbotron.append(post);
+    post.append(businessDisplay, addressDisplay, dealDisplay, timeframeDisplay);
+    post.append("<hr>");
+    post.append(listingButtons);
+    listingButtons.append(getDirections, thumbsUp, thumbsUpCount, thumbsDown, thumbsDownCount);
+    jumbotron.append(directionsContainer);
+    directionsContainer.append("<hr>");
+    directionsContainer.append(directions, closeDirections);
+
+  }, function (errorObject) {
+    console.log("The read failed: " + errorObject.code);
+
+  })
+>>>>>>> ebf7004ad82495ac93e25bb2a2e6593912ff3bb7
 
   // Click functions for navigating the document
 
@@ -199,7 +288,17 @@ connectedRef.on("value", function(snap) {
   $(document).on("click", ".close-directions", function () {
     var sKey = $(this).attr("key-value")
     console.log("close has been clicked for key: " + sKey);
+<<<<<<< HEAD
     $("#directions-container"+ sKey).addClass("hide");
+=======
+    $("#directions-container" + sKey).addClass("hide");
+    //jump to card after closing out walking directions
+    $('html, body').animate({
+      scrollTop: ($("#jumbotron" + sKey).offset().top)
+    }, 800);
+
+
+>>>>>>> ebf7004ad82495ac93e25bb2a2e6593912ff3bb7
   });
 
 });
