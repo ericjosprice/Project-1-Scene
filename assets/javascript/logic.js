@@ -168,8 +168,8 @@ $(document).ready(function () {
     dealDisplay.attr("id", "deal-display" + key);
 
     // store time variable for display
-    var sStart = moment(sv.time1, 'HH:mm').format('hh:mm a');
-    var sEnd = moment(sv.time2, 'HH:mm').format('hh:mm a');
+    var sStart = moment(sv.time1, 'HH:mm').format('h:mm a');
+    var sEnd = moment(sv.time2, 'HH:mm').format('h:mm a');
     var sMinutes = moment(sv.time2, 'HH:mm').diff(moment(), "minutes");
 
     if (sMinutes <= 0) {
@@ -177,7 +177,7 @@ $(document).ready(function () {
       var timeframeDisplay = $("<div>").addClass("timeframe-display").text(sMinutes);
     } else {
 
-      var timeframeDisplay = $("<div>").addClass("timeframe-display").text(sStart + sEnd);
+      var timeframeDisplay = $("<div>").addClass("timeframe-display").text(sStart + " - " + sEnd);
       timeframeDisplay.attr("id", "timeframe-display" + key);
     }
 
