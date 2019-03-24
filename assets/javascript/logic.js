@@ -12,9 +12,7 @@ $(document).ready(function () {
 
   var database = firebase.database();
 
-  ////////////////////////////
-  // SUBMIT BUTTON FUNCTION //
-  ////////////////////////////
+  // SUBMIT BUTTON FUNCTION
   $("#form-submit").disabled = true;
   $("#form-submit").hide();
 
@@ -27,12 +25,10 @@ $(document).ready(function () {
     var businessInput = $("#business-input").val().trim();
     var addressInput = $("#address-input").val().trim();
     var dealInput = $("#deal-input").val().trim();
-    // var timeframeInput = $("#timeframe-input").val().trim();
     var startTimeInput = $("#time-start-input").val();
     var endTimeInput = $("#time-end-input").val();
     var likeCounter = 0;
     var dislikeCounter = 0;
-
 
     if (businessInput === "" ||
       addressInput === "" ||
@@ -41,7 +37,6 @@ $(document).ready(function () {
       endTimeInput === "") {
       $("#ins").show();
       $("#form-submit").hide();
-      // $("#form-submit").disabled = true;
       return;
     } else {
       // Code for handling the push
@@ -62,11 +57,8 @@ $(document).ready(function () {
       $("#deal-input").val("")
       $("#time-start-input").val("")
       $("#time-end-input").val("")
-
     }
-
   });
-
 
   var likeClickVal = 0;
 
@@ -85,13 +77,11 @@ $(document).ready(function () {
     }
   });
 
-  ///////////////////////////////////
-  // like/dislike button functions///
-  ///////////////////////////////////
+  // like/dislike button functions
   function updateLikes(key) {
     var updatedCurrentClicks;
     database.ref("/" + key + "/like").transaction(function (currentClicks) {
-      ///manually done toggle button...///
+      //manually done toggle button...
       if (likeClickVal === 1) {
         updatedCurrentClicks = (currentClicks || 0) - 1;
       } else {
@@ -140,21 +130,14 @@ $(document).ready(function () {
     updateDislikes(dislikeClass);
   })
 
-  ////////////////////////////////////////
-  // Firebase watcher .on("child_added" //
-  ////////////////////////////////////////
+  // Firebase watcher .on("child_added")
   database.ref().on("child_added", function (childSnapshot) {
     // storing the snapshot.val() in a variable for convenience
     var sv = childSnapshot.val();
     var key = childSnapshot.key;
 
-    console.log(sv);
-    console.log(key);
     // HTML elements created with jQuery 
     //all cards and their elements have been given a unique ID
-
-    // generating a random number to assign a background pattern
-    // var randomNumber = Math.floor(Math.random() * 6) + 1;
 
     var jumbotron = $("<div>").addClass("jumbotron pattern-2");
     jumbotron.attr("id", "jumbotron" + key);
@@ -209,15 +192,10 @@ $(document).ready(function () {
     directionsContainer.append(directions, closeDirections);
 
   }, function (errorObject) {
-    console.log("The read failed: " + errorObject.code);
-
   })
-
-  // Click functions for navigating the document
 
   $(document).on("click", ".close-directions", function () {
     var sKey = $(this).attr("key-value")
-    console.log("close has been clicked for key: " + sKey);
     $("#directions-container" + sKey).addClass("hide");
     //jump to card after closing out walking directions
     $('html, body').animate({
@@ -225,27 +203,25 @@ $(document).ready(function () {
     }, 800);
   });
 
-  function splash(){
+  function splash() {
     $("#splash-screen").addClass("hide")
   }
 
   setTimeout(splash, 2500);
 
   // animated top bar shrink on scroll
-
-  window.onscroll = function() {scrollFunction()};
+  window.onscroll = function () { scrollFunction() };
 
   function scrollFunction() {
     if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
       document.getElementById("navbar").style.height = "70px";
       document.getElementById("nav-color").style.opacity = "0.95";
       document.getElementById("brand").style.fontSize = "35px";
-      
+
     } else {
       document.getElementById("navbar").style.height = "150px";
       document.getElementById("nav-color").style.opacity = "0";
       document.getElementById("brand").style.fontSize = "80px";
     }
   }
-
 });
